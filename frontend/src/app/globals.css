@@ -320,9 +320,13 @@ h4 {
 }
 
 .hero-featured-split {
+  background-color: #ffffff;
+  border: 1px solid var(--border-editorial);
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-editorial);
 }
 
 .hero-featured-image-link {
@@ -334,22 +338,39 @@ h4 {
   position: relative;
   height: 280px;
   width: 100%;
-  border-radius: 2px;
   background: #e4e4e7;
 }
 
 .hero-featured-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
+  padding: 16px;
+}
+
+.hero-featured-meta-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-featured-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: #171717;
+}
+
+.hero-featured-meta-details {
+  font-size: 12px;
+  color: #71717a;
 }
 
 .hero-featured-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 21px;
-  font-weight: 700;
-  color: var(--text-editorial-title);
-  line-height: 1.2;
+  font-family: var(--font-primary), sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #171717;
+  line-height: 1.3;
   margin: 0;
   cursor: pointer;
   transition: color 0.2s;
@@ -360,9 +381,9 @@ h4 {
 }
 
 .hero-featured-desc {
-  font-size: 13px;
-  color: #4b5563;
-  line-height: 1.4;
+  font-size: 14px;
+  color: #3f3f46;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -446,22 +467,25 @@ h4 {
 @media (min-width: 768px) {
   .hero-featured-split {
     flex-direction: row;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: stretch;
+    gap: 0;
   }
 
   .hero-featured-image-link {
-    flex: 0 0 60%;
-    width: 60%;
+    flex: 0 0 50%;
+    width: 50%;
   }
 
   .hero-featured-image-container {
-    height: 320px;
+    height: 100%;
+    min-height: 360px;
   }
 
   .hero-featured-content {
     flex: 1;
+    padding: 24px 30px;
     justify-content: center;
+    gap: 16px;
   }
 }
 
@@ -473,11 +497,11 @@ h4 {
   }
 
   .hero-featured-image-container {
-    height: 380px;
+    min-height: 400px;
   }
 
   .hero-featured-title {
-    font-size: 23px;
+    font-size: 28px;
   }
 }
 

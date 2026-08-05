@@ -40,22 +40,16 @@ export default function HeroSection({ featuredArticle, stackedArticles }) {
             </Link>
             
             <div className="hero-featured-content">
-              <div style={styles.metaRow}>
-                <span className={`category-tag-badge ${getCategoryClass(featuredArticle.category)}`}>
-                  {featuredArticle.category}
+              <div className="hero-featured-meta-header">
+                <span className="hero-featured-author">{featuredArticle.author || "Dr. Sarah Jenkins"}</span>
+                <span className="hero-featured-meta-details">
+                  {featuredArticle.timeAgo || "11 hours ago"} • {featuredArticle.readTime || "2 min read"}
                 </span>
-                <span style={styles.dot}>•</span>
-                <span style={styles.dateText}>{featuredArticle.date}</span>
               </div>
               <Link href={`/article/${featuredArticle.id}`}>
                 <h1 className="hero-featured-title">{featuredArticle.title}</h1>
               </Link>
               <p className="hero-featured-desc">{featuredArticle.description}</p>
-              <div style={styles.readTime}>
-                <span>By {featuredArticle.author || "Dr. Sarah Jenkins"}</span>
-                <span>•</span>
-                <span>{featuredArticle.readTime}</span>
-              </div>
             </div>
           </div>
 
