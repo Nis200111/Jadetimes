@@ -16,9 +16,9 @@ const mockNewsData = [
   // 2-4. Hero Stacked Stories (IDs: 2, 3, 4)
   {
     id: 2,
-    title: "Intellectual Property Rights Explained: Protecting What You Create",
+    title: "Intellectual Property Rights Explained: Protecting What You...",
     category: "Law",
-    image: "/images/e9a65f_3ce2b6fa19d24b2da5901097af01891f~mv2.avif",
+    image: "/images/0b3a43_75181dff76a6414fb5436647c5676229~mv2.avif",
     date: "August 3, 2026",
     readTime: "3 min read"
   },
