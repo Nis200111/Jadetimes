@@ -15,9 +15,9 @@ const mockNewsData = [
   // 2-4. Hero Stacked Stories (IDs: 2, 3, 4)
   {
     id: 2,
-    title: "Global Supply Chains Reposition to Regional Mini-Factories",
-    category: "Business",
-    image: "https://picsum.photos/seed/factory/800/600",
+    title: "Intellectual Property Rights Explained: Protecting What You Create",
+    category: "Law",
+    image: "/images/e9a65f_3ce2b6fa19d24b2da5901097af01891f~mv2.avif",
     date: "August 3, 2026",
     readTime: "3 min read"
   },
