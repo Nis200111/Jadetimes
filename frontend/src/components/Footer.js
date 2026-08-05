@@ -31,7 +31,7 @@ export default function Footer() {
             <h2 className="footer-logo-title">Jadetimes</h2>
             <div className="footer-logo-links">
               <Link href="/advertise">Advertise with us</Link>
-              <span className="footer-divider">|</span>
+              <span className="footer-divider"> &nbsp;|&nbsp; </span>
               <Link href="/talk-to-us">Talk to us</Link>
             </div>
           </div>
@@ -110,13 +110,13 @@ export default function Footer() {
                   >
                     {link}
                   </Link>
-                  <span className="footer-divider">|</span>
+                  <span className="footer-divider"> &nbsp;|&nbsp; </span>
                 </React.Fragment>
               ))}
               <span className="footer-legal-link">To report security issues email us at info@jadetimes.com</span>
-              <span className="footer-divider">|</span>
+              <span className="footer-divider"> &nbsp;|&nbsp; </span>
               <Link href="/shop" className="footer-legal-link">Jadetimes Shop</Link>
-              <span className="footer-divider">|</span>
+              <span className="footer-divider"> &nbsp;|&nbsp; </span>
               <Link href="/blogs" className="footer-legal-link">Blogs</Link>
             </div>
             <p className="footer-disclaimer-text">
