@@ -23,9 +23,9 @@ const mockNewsData = [
   },
   {
     id: 3,
-    title: "Zero-Emission Timber-Framed Suburb Project Breaks Ground",
-    category: "Climate",
-    image: "https://picsum.photos/seed/suburb/800/600",
+    title: "Trump orders review of all Afghan immigrants after...",
+    category: "USA",
+    image: "/images/e9a65f_3ce2b6fa19d24b2da5901097af01891f~mv2.avif",
     date: "August 2, 2026",
     readTime: "4 min read"
   },
