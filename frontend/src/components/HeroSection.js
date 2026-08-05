@@ -65,6 +65,10 @@ export default function HeroSection({ featuredArticle, stackedArticles }) {
             <div className="hero-stack-list">
               {stackedArticles && stackedArticles.slice(0, 3).map((article) => (
                 <Link href={`/article/${article.id}`} key={article.id} className="hero-stack-item">
+                  <div className="hero-stack-item-content">
+                    <h4 className="hero-stack-title">{article.title}</h4>
+                    <span className="hero-stack-category">{article.category}</span>
+                  </div>
                   <div className="hero-stack-image-container zoom-image-container">
                     <Image 
                       src={article.image} 
@@ -73,13 +77,6 @@ export default function HeroSection({ featuredArticle, stackedArticles }) {
                       sizes="80px"
                       style={{ objectFit: 'cover' }}
                     />
-                  </div>
-                  <div className="hero-stack-item-content">
-                    <span className={`category-tag-badge ${getCategoryClass(article.category)}`}>
-                      {article.category}
-                    </span>
-                    <h4 className="hero-stack-title">{article.title}</h4>
-                    <span style={styles.stackReadTime}>{article.readTime}</span>
                   </div>
                 </Link>
               ))}
