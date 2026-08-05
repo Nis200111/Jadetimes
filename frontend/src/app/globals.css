@@ -97,6 +97,10 @@ a {
   transition: var(--transition-smooth);
 }
 
+a:visited {
+  color: inherit;
+}
+
 h1,
 h2,
 h3,
@@ -357,7 +361,13 @@ h4 {
 .hero-featured-author {
   font-size: 13px;
   font-weight: 600;
-  color: #171717;
+  color: #2563eb;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.hero-featured-author:hover {
+  text-decoration: underline;
 }
 
 .hero-featured-meta-details {
