@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Updates News Feed</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0e1a;
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            --accent-purple: #6c63ff;
+            --accent-teal: #00b894;
+            --accent-gold: #fdcb6e;
+            --accent-coral: #ff6b6b;
+            --text-white: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 184, 148, 0.08) 0%, transparent 40%);
+            font-family: var(--font-family);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Container styling */
+        .feed-wrapper {
+            width: 100%;
+            max-width: 680px;
+            position: relative;
+        }
+
+        /* Glow effect in background of container */
+        .feed-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header styling */
+        .feed-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .feed-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feed-title {
+            font-size: 22px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-white);
+        }
+
+        .badge-count {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(108, 99, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* Gradient Divider Line */
+        .feed-divider {
+            height: 2px;
+            width: 100%;
+            background: linear-gradient(to right, var(--accent-purple), var(--accent-teal));
+            margin-bottom: 24px;
+            border-radius: 2px;
+            animation: expandWidth 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* Cards list */
+        .cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* News Card structure */
+        .news-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left-width: 4px; /* variable color set inline/class */
+            border-radius: var(--card-border-radius);
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Soft inner glow */
+        .news-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Accent Colors classes */
+        .card-purple { border-left-color: var(--accent-purple); }
+        .card-teal { border-left-color: var(--accent-teal); }
+        .card-gold { border-left-color: var(--accent-gold); }
+        .card-coral { border-left-color: var(--accent-coral); }
+
+        /* Card Contents */
+        .card-body {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .card-time {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .card-headline {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.45;
+            color: var(--text-white);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.25s ease;
+        }
+
+        /* Right Arrow Icon */
+        .card-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: var(--text-muted);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            flex-shrink: 0;
+        }
+
+        .card-arrow svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover States */
+        .news-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Accent-specific glow shadow on hover */
+        .card-purple:hover {
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.15), 0 1px 1px rgba(108, 99, 255, 0.1);
+            border-left-color: #837dff;
+        }
+        .card-teal:hover {
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.15), 0 1px 1px rgba(0, 184, 148, 0.1);
+            border-left-color: #12d3ad;
+        }
+        .card-gold:hover {
+            box-shadow: 0 10px 30px rgba(253, 203, 110, 0.15), 0 1px 1px rgba(253, 203, 110, 0.1);
+            border-left-color: #ffe09e;
+        }
+        .card-coral:hover {
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.15), 0 1px 1px rgba(255, 107, 107, 0.1);
+            border-left-color: #ff8e8e;
+        }
+
+        .news-card:hover .card-headline {
+            color: #ffffff;
+        }
+
+        .news-card:hover .card-arrow {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .news-card:hover .card-arrow svg {
+            transform: translateX(4px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes expandWidth {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animation delays for cards */
+        .news-card:nth-child(1) { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both; }
+        .news-card:nth-child(2) { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+        .news-card:nth-child(3) { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both; }
+        .news-card:nth-child(4) { animation: slideInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    </style>
+</head>
+<body>
+
+    <div class="feed-wrapper">
+        <!-- Header -->
+        <header class="feed-header">
+            <div class="feed-title-wrap">
+                <h2 class="feed-title">Latest Updates</h2>
+                <span class="badge-count">4 updates</span>
+            </div>
+        </header>
+        
+        <!-- Gradient Divider Line -->
+        <div class="feed-divider"></div>
+
+        <!-- News Cards Grid -->
+        <div class="cards-list">
+            
+            <!-- Card 1 -->
+            <a href="#" class="news-card card-purple">
+                <div class="card-body">
+                    <span class="card-time">3 days ago</span>
+                    <h3 class="card-headline">The New Silk Road: Re-engineering Global Trade Routes</h3>
+                </div>
+                <div class="card-arrow">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="#" class="news-card card-teal">
+                <div class="card-body">
+                    <span class="card-time">3 days ago</span>
+                    <h3 class="card-headline">Rogue Agents or Marketing Stunt? The Unsettling Truth Behind the...</h3>
+                </div>
+                <div class="card-arrow">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="#" class="news-card card-gold">
+                <div class="card-body">
+                    <span class="card-time">3 days ago</span>
+                    <h3 class="card-headline">The Invisible Invasion: How Microplastics Are Getting Into Our...</h3>
+                </div>
+                <div class="card-arrow">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Card 4 -->
+            <a href="#" class="news-card card-coral">
+                <div class="card-body">
+                    <span class="card-time">3 days ago</span>
+                    <h3 class="card-headline">Who Owns You After You Die? The Messy Law of Digital Inheritance</h3>
+                </div>
+                <div class="card-arrow">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
