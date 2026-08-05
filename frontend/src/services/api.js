@@ -6,7 +6,7 @@ const mockNewsData = [
     title: "Space Mission Achieves Core Orbit Insertion Success",
     category: "Space",
     description: "In a flawless demonstration of next-generation thruster sequences, the crew capsule successfully locked into geosynchronous orbit, beginning their six-month scientific survey.",
-    image: "https://picsum.photos/seed/astronaut/800/600",
+    image: "/images/0b3a43_9877c19093db4888be12f3638f7d0cd0~mv2.avif",
     date: "August 3, 2026",
     isFeatured: true,
     readTime: "5 min read",
