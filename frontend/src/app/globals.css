@@ -414,11 +414,11 @@ h4 {
   background-color: #ffffff;
   border: 1px solid var(--border-editorial);
   border-radius: 4px;
-  padding: 16px;
+  padding: 10px 12px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 16px;
+  gap: 12px;
   box-shadow: var(--shadow-editorial);
   transition: var(--transition-smooth);
 }
@@ -430,8 +430,8 @@ h4 {
 
 .hero-stack-image-container {
   position: relative;
-  width: 70px;
-  height: 70px;
+  width: 55px;
+  height: 55px;
   border-radius: 2px;
   flex-shrink: 0;
   background: #e4e4e7;
@@ -441,11 +441,11 @@ h4 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .hero-stack-title {
-  font-size: 14.5px;
+  font-size: 13px;
   font-weight: 500;
   color: #171717;
   line-height: 1.4;
@@ -457,7 +457,7 @@ h4 {
 }
 
 .hero-stack-category {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: #71717a;
   text-transform: uppercase;
