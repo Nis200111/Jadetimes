@@ -61,7 +61,6 @@ export default function HeroSection({ featuredArticle, stackedArticles }) {
 
           {/* Right Column: 3 Stacked Minor Articles */}
           <div className="hero-sidebar-stack">
-            <h3 className="hero-stack-header">Trending Stories</h3>
             <div className="hero-stack-list">
               {stackedArticles && stackedArticles.slice(0, 3).map((article) => (
                 <Link href={`/article/${article.id}`} key={article.id} className="hero-stack-item">
