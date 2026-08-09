@@ -897,6 +897,7 @@ h4 {
 }
 
 .footer-divider {
+  display: inline-block;
   color: #e4e4e7;
   margin: 0 10px; /* Increased margin for spacious dividers matching Screenshot 2 */
 }
@@ -935,16 +936,15 @@ h4 {
 }
 
 .footer-legal-links-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 6px;
-  color: #71717a;
-  line-height: 1.4;
+  display: block; /* Standard block container for inline text flow */
   font-family: 'Poppins', var(--font-primary), sans-serif;
+  font-size: 11px;
+  line-height: 1.8; /* Spacious line-height for wrapped lines */
+  color: #52525b;
 }
 
 .footer-legal-link {
+  display: inline; /* Flow inline like normal words */
   color: #52525b;
   font-size: 11px;
   font-family: 'Poppins', var(--font-primary), sans-serif;
@@ -957,9 +957,10 @@ h4 {
 }
 
 .footer-disclaimer-text {
-  color: #52525b; /* Match legal link color */
+  display: inline; /* Flow inline like normal words */
+  color: #52525b;
   font-family: 'Poppins', var(--font-primary), sans-serif;
-  font-size: 11px; /* Match legal link size */
+  font-size: 11px;
   line-height: inherit;
   margin: 0;
 }
