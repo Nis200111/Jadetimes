@@ -764,7 +764,7 @@ const styles = {
   },
   bottomVideoTrack: {
     display: 'flex',
-    gap: '20px',
+    gap: '12px', // Reduced gap between cards from 20px to 12px
     overflowX: 'auto',
     scrollBehavior: 'smooth',
     width: '100%',
@@ -775,7 +775,7 @@ const styles = {
     flexDirection: 'column',
     gap: '10px',
     flexShrink: 0,
-    width: 'calc((100% - 80px) / 5)', // On desktop, show exactly 5 items
+    width: 'calc((100% - 48px) / 5)', // Recalculated for 12px gaps (4 gaps * 12px = 48px)
     minWidth: '220px' // Responsive fallback
   },
   bottomVideoThumb: {
