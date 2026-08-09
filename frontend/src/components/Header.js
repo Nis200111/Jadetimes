@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, X } from 'lucide-react';
 
-export default function Header() {
+export default function Header({ active = "Home" }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [todayDate, setTodayDate] = useState('');
 
@@ -15,7 +15,7 @@ export default function Header() {
   }, []);
 
   const categories = [
-    { name: "Home", path: "/", active: true },
+    { name: "Home", path: "/" },
     { name: "News", path: "/category/news" },
     { name: "Opinion", path: "/category/opinion" },
     { name: "Business", path: "/category/business" },
@@ -89,7 +89,7 @@ export default function Header() {
               href={cat.path} 
               style={{
                 ...styles.navLink,
-                color: cat.active ? '#ef4444' : '#111115'
+                color: cat.name === active ? '#ef4444' : '#111115'
               }}
             >
               {cat.name}
@@ -108,7 +108,7 @@ export default function Header() {
                 href={cat.path} 
                 style={{
                   ...styles.mobileLink,
-                  color: cat.active ? '#ef4444' : '#111115'
+                  color: cat.name === active ? '#ef4444' : '#111115'
                 }}
                 onClick={() => setMobileMenuOpen(false)}
               >

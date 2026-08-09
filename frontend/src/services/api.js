@@ -433,6 +433,168 @@ const mockPodcasts = [
   }
 ];
 
+// News category page (topic row, hero feature, sidebar rail and bottom card row)
+const mockNewsPage = {
+  topics: [
+    { name: "Israel-Gaza War", path: "/category/news/israel-gaza-war" },
+    { name: "Ukraine-Russia War", path: "/category/news/ukraine-russia-war" },
+    { name: "USA", path: "/category/news/usa" },
+    { name: "Europe", path: "/category/news/europe" },
+    { name: "Australia", path: "/category/news/australia" },
+    { name: "Africa", path: "/category/news/africa" },
+    { name: "Asia", path: "/category/news/asia" }
+  ],
+  latestUpdates: [
+    { id: 101, timeAgo: "Jul 22", title: "Tyla Revealed the Tracklist of A*POP" },
+    { id: 102, timeAgo: "May 29", title: "Generative AI: The New Frontier in Legal Technology" },
+    { id: 103, timeAgo: "Apr 10", title: "Global Energy Crisis Deepens as Middle East Conflict Sends..." },
+    { id: 104, timeAgo: "Mar 17", title: "Raye Revealed The Tracklist for This Music May Contain Hope" }
+  ],
+  featured: {
+    id: 201,
+    title: "France Enters Political Turmoil as Pension Reform Protests Return",
+    description: "Political instability returned to France today as nationwide protests erupted once again over the government's controversial pension reform policies",
+    image: "https://picsum.photos/seed/parisprotest/1000/900",
+    author: "Niveditaa chakrapani",
+    timeAgo: "19 hours ago",
+    category: "Europe"
+  },
+  sidebar: [
+    {
+      id: 202,
+      title: "AI Surge Set to Drive Record IT Spending in 2026",
+      category: "Technology",
+      image: "https://picsum.photos/seed/aispending/400/300"
+    },
+    {
+      id: 203,
+      title: "Trump orders review of all Afghan immigrants after...",
+      category: "USA",
+      image: "/images/e9a65f_3ce2b6fa19d24b2da5901097af01891f~mv2.avif"
+    },
+    {
+      id: 204,
+      title: "The 2026 Coachella Valley Music Festival",
+      category: "USA",
+      image: "https://picsum.photos/seed/coachella/400/300"
+    },
+    {
+      id: 205,
+      title: "Markets Steady as Central Banks Hold Rates",
+      category: "Business",
+      image: "https://picsum.photos/seed/marketsteady/400/300"
+    }
+  ],
+  moreFrom: {
+    region: "USA",
+    articles: [
+      {
+        id: 301,
+        title: "France Enters Political Turmoil as Pension Reform Protests Return",
+        image: "https://picsum.photos/seed/parisprotest/400/300"
+      },
+      {
+        id: 302,
+        title: "FLO Revealed the Tracklist For Therapy at The Club",
+        author: "Wanjiru Waweru",
+        image: "https://picsum.photos/seed/flotracklist/400/300"
+      },
+      {
+        id: 303,
+        title: "Could We Really Live on Mars?",
+        author: "Ravichandran Harini",
+        timeAgo: "19 hours ago",
+        readTime: "2 min read",
+        image: "https://picsum.photos/seed/marssurface/400/300"
+      },
+      {
+        id: 304,
+        title: "The Invisible Enemy: Why Is Dengue Spreading So Rapidly Across Sri Lanka?",
+        image: "https://picsum.photos/seed/denguemosquito/400/300"
+      },
+      {
+        id: 305,
+        title: "Ariana Grande Released Her New Single – Petal",
+        author: "Wanjiru Waweru",
+        image: "https://picsum.photos/seed/arianasingle/400/300"
+      },
+      {
+        id: 306,
+        title: "When the Rain Turns Extreme",
+        author: "ravichandran harini",
+        timeAgo: "19 hours ago",
+        readTime: "2 min read",
+        image: "https://picsum.photos/seed/rainumbrella/400/300"
+      },
+      {
+        id: 307,
+        title: "Cristiano Ronaldo: Legacy, Present Era, and Future Horizons",
+        image: "https://picsum.photos/seed/ronaldoportrait/400/300"
+      },
+      {
+        id: 308,
+        title: "The Future of Tech Careers",
+        author: "Ravichandran Harini",
+        timeAgo: "5 days ago",
+        readTime: "2 min read",
+        image: "/images/0b3a43_75181dff76a6414fb5436647c5676229~mv2.avif"
+      },
+      {
+        id: 309,
+        title: "Beneath the Waves: The Cables That Carry Our World",
+        author: "Ravichandran Harini",
+        image: "/images/travel_cable.png"
+      },
+      {
+        id: 310,
+        title: "When Antibiotics Stop Working",
+        author: "Ravichandran Harini",
+        image: "https://picsum.photos/seed/antibiotics/400/300"
+      }
+    ]
+  },
+  youtubeFeature: {
+    id: 211,
+    title: "Biden Honors Fallen Heroes at Arlington National Cemetery on Memorial Day",
+    description: "President Joe Biden honored fallen soldiers at Arlington National Cemetery on Memorial Day, urging the nation to remember their sacrifice. He also reflected on the ninth anniversary of his son Beau Biden's death, acknowledging the deep pain",
+    channel: "Jadetimes",
+    image: "https://picsum.photos/seed/arlingtonmemorial/1600/900",
+    videoId: null // set to a YouTube video id to enable in-place playback
+  },
+  bottomGrid: [
+    {
+      id: 206,
+      title: "The Invisible Enemy: Why Is Dengue Spreading So Rapidly Across Sri Lanka?",
+      description: "The monsoon rain has barely stopped falling on a Negombo rooftop when...",
+      image: "https://picsum.photos/seed/denguemosquito/800/600"
+    },
+    {
+      id: 207,
+      title: "World Cup Fever Grows as Major Teams Prepare for Crucial Matches",
+      description: "The 2026 FIFA World Cup continues to capture global attention as several...",
+      image: "https://picsum.photos/seed/worldcuptrophy/800/600"
+    },
+    {
+      id: 208,
+      title: "Australia Holds Interest Rates but Warns Inflation Battle Isn't Over",
+      description: "The Reserve Bank of Australia announced today that it will keep...",
+      image: "https://picsum.photos/seed/reservebank/800/600"
+    },
+    {
+      id: 209,
+      title: "Massive Undersea Internet Cable Project Announced Across Asia and Africa",
+      description: "A major international telecommunications consortium...",
+      image: "/images/travel_cable.png"
+    },
+    {
+      id: 210,
+      title: "US-Iran Strikes Challenge Interim Peace, Global Stability and the Future of...",
+      description: "The rivalry between US-Iran strengthening is further evidence as...",
+      image: "https://picsum.photos/seed/usirantalks/800/600"
+    }
+  ]
+};
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
 async function apiCall(endpoint) {
@@ -500,6 +662,15 @@ export async function fetchPodcasts() {
   } catch (error) {
     console.warn("Using mockPodcasts fallback:", error.message);
     return mockPodcasts;
+  }
+}
+
+export async function fetchNewsPage() {
+  try {
+    return await apiCall('/pages/news');
+  } catch (error) {
+    console.warn("Using mockNewsPage fallback:", error.message);
+    return mockNewsPage;
   }
 }
 
