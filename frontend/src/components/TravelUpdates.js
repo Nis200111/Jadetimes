@@ -247,6 +247,7 @@ const styles = {
     display: '-webkit-box',
     WebkitLineClamp: '3', // Allow up to 3 lines of text wrapping
     WebkitBoxOrient: 'vertical',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    maxWidth: '160px' // Constrain width to force wrapping to 3 lines
   }
 };
