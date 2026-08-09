@@ -12,7 +12,7 @@ const staticTracks = [
     show: "Jadetimes Talks",
     duration: "14:28",
     durationSec: 868,
-    image: "/images/podcast_cover.png",
+    image: "/images/deepseek_cover.png",
     description: "In this episode of Jadetimes Talks, we dive into the story of Deepseek AI, a groundbreaking AI model shaping the future of technology and business. Join our hosts, Jessy and David, as they explore how Deepseek AI is revolutionizing industries, enhancing automation, and driving innovation. From its inception to real-world applications, we uncover the vision behind Deepseek AI and its impact on businesses worldwide. Don't miss this insightful conversation on the future of artificial intelligence!"
   },
   {
@@ -22,7 +22,7 @@ const staticTracks = [
     show: "Jadetimes Talk",
     duration: "08:27",
     durationSec: 507,
-    image: "/images/podcast_cover.png",
+    image: "/images/deepseek_cover.png",
     description: "In this episode, we journey to the sacred city of Kandy, Sri Lanka, to explore the rich history and spiritual significance of the Temple of the Sacred Tooth Relic. Discover the architectural marvels, the ancient rituals, and the cultural legacy of this UNESCO World Heritage site that has stood as a symbol of sovereignty and devotion for centuries."
   },
   {
@@ -32,7 +32,7 @@ const staticTracks = [
     show: "Jadetimes Talks",
     duration: "21:43",
     durationSec: 1303,
-    image: "/images/podcast_cover.png",
+    image: "/images/deepseek_cover.png",
     description: "Join us as we uncover the eternal love story behind the creation of the Taj Mahal, one of the Seven Wonders of the World. From Shah Jahan's vision to the incredible engineering and artistic craftsmanship of the Mughal empire, this episode explores the history, myths, and enduring beauty of India's most iconic monument."
   }
 ];
@@ -44,6 +44,7 @@ export default function PodcastSection() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [btnHovered, setBtnHovered] = useState(false);
+  const [getTrackHovered, setGetTrackHovered] = useState(false);
   const [link1Hovered, setLink1Hovered] = useState(false);
   const [link2Hovered, setLink2Hovered] = useState(false);
   
@@ -147,18 +148,19 @@ export default function PodcastSection() {
                 {/* Control bar */}
                 <div style={styles.controlsRow}>
                   <div style={styles.controlButtons}>
-                    <button onClick={handlePlayPause} style={styles.playBtn}>
+                    {/* Blue Play Square Button */}
+                    <button onClick={handlePlayPause} style={styles.playBtnSquare}>
                       {isPlaying ? (
-                        <Pause size={18} fill="#ffffff" color="#ffffff" />
+                        <Pause size={12} fill="#ffffff" color="#ffffff" />
                       ) : (
-                        <Play size={18} fill="#ffffff" color="#ffffff" style={{ marginLeft: '2px' }} />
+                        <Play size={12} fill="#ffffff" color="#ffffff" style={{ marginLeft: '1px' }} />
                       )}
                     </button>
                     <button onClick={handlePrev} style={styles.skipBtn}>
-                      <SkipBack size={14} fill="#ffffff" color="#ffffff" />
+                      <SkipBack size={12} fill="#ffffff" color="#ffffff" />
                     </button>
                     <button onClick={handleNext} style={styles.skipBtn}>
-                      <SkipForward size={14} fill="#ffffff" color="#ffffff" />
+                      <SkipForward size={12} fill="#ffffff" color="#ffffff" />
                     </button>
                   </div>
 
@@ -168,10 +170,10 @@ export default function PodcastSection() {
 
                   <div style={styles.rightControls}>
                     <button onClick={() => setIsMuted(!isMuted)} style={styles.iconBtn}>
-                      {isMuted ? <VolumeX size={16} color="#a1a1aa" /> : <Volume2 size={16} color="#a1a1aa" />}
+                      {isMuted ? <VolumeX size={15} color="#ffffff" /> : <Volume2 size={15} color="#ffffff" />}
                     </button>
                     <button style={styles.iconBtn}>
-                      <ListMusic size={16} color="#a1a1aa" />
+                      <ListMusic size={15} color="#ffffff" />
                     </button>
                   </div>
                 </div>
@@ -203,25 +205,46 @@ export default function PodcastSection() {
                     onClick={() => handleTrackSelect(index)}
                     style={{
                       ...styles.trackRow,
-                      backgroundColor: isActive ? 'rgba(255, 255, 255, 0.04)' : 'transparent'
+                      backgroundColor: isActive ? 'rgba(255, 255, 255, 0.03)' : 'transparent'
                     }}
                   >
-                    <span style={{
-                      ...styles.trackNumber,
-                      color: isActive ? '#ef4444' : '#ffffff'
-                    }}>
-                      {index + 1}
-                    </span>
+                    {/* Active shows circular play button, others show number */}
+                    <div style={styles.trackLeftCol}>
+                      {isActive ? (
+                        <div style={styles.activePlayCircle}>
+                          <Play size={10} fill="#ffffff" color="#ffffff" style={{ marginLeft: '1px' }} />
+                        </div>
+                      ) : (
+                        <span style={styles.trackNumber}>{index + 1}</span>
+                      )}
+                    </div>
+
                     <span style={{
                       ...styles.trackRowTitle,
                       fontWeight: isActive ? '700' : '400',
-                      color: isActive ? '#ef4444' : '#ffffff'
+                      color: '#ffffff'
                     }}>
                       {track.title}
                     </span>
+
                     <span style={styles.trackRowDuration}>
                       {track.duration}
                     </span>
+
+                    {/* Active shows Get Track button */}
+                    {isActive && (
+                      <button 
+                        onMouseEnter={() => setGetTrackHovered(true)}
+                        onMouseLeave={() => setGetTrackHovered(false)}
+                        style={{
+                          ...styles.getTrackBtn,
+                          backgroundColor: getTrackHovered ? '#ffffff' : 'transparent',
+                          color: getTrackHovered ? '#000000' : '#ffffff'
+                        }}
+                      >
+                        Get Track
+                      </button>
+                    )}
                   </div>
                 );
               })}
@@ -249,7 +272,7 @@ export default function PodcastSection() {
                 onMouseLeave={() => setLink1Hovered(false)}
                 style={{
                   ...styles.link,
-                  color: link1Hovered ? '#e2be76' : '#cca353'
+                  color: link1Hovered ? '#ffffff' : '#d1d1d6'
                 }}
               >
                 Visit Our Podcast &gt;
@@ -260,7 +283,7 @@ export default function PodcastSection() {
                 onMouseLeave={() => setLink2Hovered(false)}
                 style={{
                   ...styles.link,
-                  color: link2Hovered ? '#e2be76' : '#cca353'
+                  color: link2Hovered ? '#ffffff' : '#d1d1d6'
                 }}
               >
                 Listen on Amazon Music &gt;
@@ -279,7 +302,7 @@ const styles = {
     background: '#000000',
     padding: '40px 5%',
     width: '100%',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+    fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, sans-serif"
   },
   container: {
     maxWidth: '1350px',
@@ -294,17 +317,16 @@ const styles = {
     display: 'flex'
   },
   headerUnderlineWrapper: {
-    borderBottom: '3px solid #ef4444',
-    paddingBottom: '8px',
-    marginBottom: '-2px'
+    borderBottom: '2px solid #ef4444',
+    paddingBottom: '6px',
+    marginBottom: '-1px'
   },
   headerTitle: {
     fontSize: '18px',
-    fontWeight: '800',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
+    fontWeight: '700',
     color: '#ffffff',
-    margin: 0
+    margin: 0,
+    fontFamily: "'Poppins', sans-serif"
   },
   contentGrid: {
     display: 'grid',
@@ -318,9 +340,9 @@ const styles = {
   playerCard: {
     display: 'flex',
     gap: '20px',
-    background: '#0c0c0e',
-    border: '1px solid #27272a',
-    padding: '20px',
+    background: '#000000',
+    border: '1px solid #1f1f22',
+    padding: '16px',
     alignItems: 'center'
   },
   albumArtContainer: {
@@ -328,7 +350,7 @@ const styles = {
     height: '110px',
     flexShrink: 0,
     overflow: 'hidden',
-    border: '1px solid #27272a'
+    border: '1px solid #1f1f22'
   },
   albumArt: {
     width: '100%',
@@ -350,32 +372,35 @@ const styles = {
     color: '#a1a1aa',
     fontSize: '11px',
     textTransform: 'uppercase',
-    fontWeight: '600',
-    letterSpacing: '0.5px'
+    fontWeight: '500',
+    fontFamily: "'Poppins', sans-serif"
   },
   getAlbumBtn: {
     background: 'transparent',
     border: '1px solid #ffffff',
     fontSize: '11px',
-    fontWeight: '600',
+    fontWeight: '500',
     padding: '4px 12px',
     cursor: 'pointer',
     transition: 'all 0.2s',
-    outline: 'none'
+    outline: 'none',
+    fontFamily: "'Poppins', sans-serif"
   },
   trackTitle: {
     color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: '700',
-    margin: '4px 0 0 0',
+    fontSize: '15px',
+    fontWeight: '600',
+    margin: '2px 0 0 0',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    fontFamily: "'Poppins', sans-serif"
   },
   trackShow: {
     color: '#71717a',
     fontSize: '12px',
-    margin: '0 0 8px 0'
+    margin: '0 0 8px 0',
+    fontFamily: "'Poppins', sans-serif"
   },
   controlsRow: {
     display: 'flex',
@@ -386,10 +411,10 @@ const styles = {
   controlButtons: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px'
+    gap: '8px'
   },
-  playBtn: {
-    background: 'transparent',
+  playBtnSquare: {
+    background: '#1d4ed8', // Blue square background
     border: 'none',
     color: '#ffffff',
     cursor: 'pointer',
@@ -398,7 +423,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     width: '24px',
-    height: '24px'
+    height: '24px',
+    borderRadius: '2px'
   },
   skipBtn: {
     background: 'transparent',
@@ -456,24 +482,51 @@ const styles = {
     cursor: 'pointer',
     transition: 'background-color 0.2s'
   },
-  trackNumber: {
-    width: '24px',
-    fontSize: '14px',
-    fontWeight: '700',
+  trackLeftCol: {
+    width: '28px',
+    display: 'flex',
+    alignItems: 'center',
     flexShrink: 0
   },
-  trackRowTitle: {
+  activePlayCircle: {
+    width: '18px',
+    height: '18px',
+    borderRadius: '50%',
+    border: '1px solid #ffffff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  trackNumber: {
     fontSize: '13px',
+    fontWeight: '400',
+    color: '#ffffff'
+  },
+  trackRowTitle: {
+    fontSize: '13.5px',
     flexGrow: 1,
     paddingRight: '16px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    fontFamily: "'Poppins', sans-serif"
   },
   trackRowDuration: {
-    color: '#a1a1aa',
-    fontSize: '13px',
-    flexShrink: 0
+    color: '#ffffff',
+    fontSize: '13.5px',
+    flexShrink: 0,
+    marginRight: '12px'
+  },
+  getTrackBtn: {
+    background: 'transparent',
+    border: '1px solid rgba(255, 255, 255, 0.3)',
+    fontSize: '11px',
+    fontWeight: '500',
+    padding: '4px 10px',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    outline: 'none',
+    fontFamily: "'Poppins', sans-serif"
   },
   rightColumn: {
     display: 'flex',
@@ -483,25 +536,28 @@ const styles = {
   },
   spotifyUpdatesBadge: {
     alignSelf: 'flex-start',
-    background: '#27272a',
+    background: '#1c1c1e',
     color: '#ffffff',
-    fontSize: '9px',
-    fontWeight: '700',
+    fontSize: '9.5px',
+    fontWeight: '600',
     padding: '4px 10px',
-    letterSpacing: '0.8px',
-    borderRadius: '2px'
+    letterSpacing: '0.5px',
+    borderRadius: '2px',
+    fontFamily: "'Poppins', sans-serif"
   },
   updatesTitle: {
-    fontSize: '18px',
-    fontWeight: '700',
-    lineHeight: '1.3',
-    margin: 0
+    fontSize: '17px',
+    fontWeight: '600',
+    lineHeight: '1.35',
+    margin: 0,
+    fontFamily: "'Poppins', sans-serif"
   },
   updatesDescription: {
-    fontSize: '12.5px',
+    fontSize: '12px',
     color: '#d1d1d6',
     lineHeight: '1.6',
-    margin: 0
+    margin: 0,
+    fontFamily: "'Poppins', sans-serif"
   },
   linksRow: {
     display: 'flex',
@@ -510,9 +566,10 @@ const styles = {
   },
   link: {
     fontSize: '12.5px',
-    fontWeight: '600',
+    fontWeight: '500',
     textDecoration: 'none',
-    transition: 'color 0.2s'
+    transition: 'color 0.2s',
+    fontFamily: "'Poppins', sans-serif"
   }
 };
 
