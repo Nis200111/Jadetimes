@@ -178,6 +178,16 @@ const threeColumnData = [
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const sliderRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const handleScroll = () => {
+    if (sliderRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
+      setShowLeftArrow(scrollLeft > 10);
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth - 10);
+    }
+  };
 
   const handlePrevSlide = () => {
     if (sliderRef.current) {
@@ -426,21 +436,24 @@ export default function HomePage() {
           {/* Section 19: Bottom Video Thumbnail Row Slider */}
           <section style={styles.bottomVideoSection}>
             <div style={styles.bottomVideoSliderWrapper}>
-              <button 
-                onClick={handlePrevSlide}
-                style={{
-                  ...styles.sliderArrow,
-                  left: '10px'
-                }}
-                aria-label="Previous videos"
-              >
-                <ChevronLeft size={20} color="#000000" />
-              </button>
+              {showLeftArrow && (
+                <button 
+                  onClick={handlePrevSlide}
+                  style={{
+                    ...styles.sliderArrow,
+                    left: '10px'
+                  }}
+                  aria-label="Previous videos"
+                >
+                  <ChevronLeft size={20} color="#000000" />
+                </button>
+              )}
 
               <div 
                 ref={sliderRef}
                 className="no-scrollbar"
                 style={styles.bottomVideoTrack}
+                onScroll={handleScroll}
               >
                 {bottomVideosData.map((video) => (
                   <div key={video.id} style={styles.bottomVideoCard}>
@@ -463,16 +476,18 @@ export default function HomePage() {
                 ))}
               </div>
 
-              <button 
-                onClick={handleNextSlide}
-                style={{
-                  ...styles.sliderArrow,
-                  right: '10px'
-                }}
-                aria-label="Next videos"
-              >
-                <ChevronRight size={20} color="#000000" />
-              </button>
+              {showRightArrow && (
+                <button 
+                  onClick={handleNextSlide}
+                  style={{
+                    ...styles.sliderArrow,
+                    right: '10px'
+                  }}
+                  aria-label="Next videos"
+                >
+                  <ChevronRight size={20} color="#000000" />
+                </button>
+              )}
             </div>
           </section>
 
