@@ -72,7 +72,7 @@ export default function Footer() {
           </div>
           <div className="footer-social-icons">
             <a href="https://wa.me/#" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="WhatsApp">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.504-5.714-1.465L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.528 2.023 14.07 1 11.998 1 6.558 1 2.135 5.371 2.131 10.8c-.002 1.74.457 3.442 1.332 4.957l-.982 3.58 3.696-.983zM17.15 13.94c-.283-.141-1.674-.827-1.933-.921-.259-.096-.449-.141-.637.142-.188.282-.729.921-.894 1.107-.165.185-.329.209-.612.068-.283-.141-1.196-.441-2.278-1.408-.842-.751-1.41-1.68-1.575-1.962-.165-.282-.018-.434.123-.574.127-.127.283-.329.424-.494.141-.165.188-.282.283-.47.094-.188.047-.353-.024-.494-.071-.141-.637-1.531-.873-2.1-.23-.554-.462-.48-.637-.489-.165-.006-.353-.007-.542-.007-.188 0-.494.071-.753.353-.259.282-.99 1.011-.99 2.47 0 1.459 1.059 2.87 1.201 3.059.141.188 2.083 3.182 5.048 4.461.705.305 1.256.487 1.684.623.709.226 1.353.194 1.863.118.568-.085 1.674-.682 1.909-1.341.236-.66.236-1.223.165-1.341-.071-.118-.259-.188-.542-.329z"/></svg>
             </a>
             <a href="https://tiktok.com/#" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="TikTok">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
@@ -122,11 +122,12 @@ export default function Footer() {
               <Link href="/shop" className="footer-legal-link">Jadetimes Shop</Link>
               <span className="footer-divider"> &nbsp;|&nbsp; </span>
               <Link href="/blogs" className="footer-legal-link">Blogs</Link>
+              <span className="footer-divider"> &nbsp;|&nbsp; </span>
+              <span className="footer-disclaimer-text">
+                The JadeTimes holds no responsibility for the content of external websites. 
+                For more information, please review our policy on external linking.
+              </span>
             </div>
-            <p className="footer-disclaimer-text">
-              The JadeTimes holds no responsibility for the content of external websites. 
-              For more information, please review our policy on external linking.
-            </p>
           </div>
         </div>
       </div>
