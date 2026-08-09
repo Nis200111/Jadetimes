@@ -132,7 +132,8 @@ const styles = {
     position: 'sticky', // Restored to sticky so it stays visible at the top when scrolling
     top: 0,
     zIndex: 1000,
-    boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
+    boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
+    background: '#ffffff' // Added solid background to prevent transparency when scrolling
   },
   topBar: {
     background: '#141416', // Slate black
