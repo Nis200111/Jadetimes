@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Play } from 'lucide-react';
+import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import Header from '../components/Header';
 import LatestUpdatesBar from '../components/LatestUpdatesBar';
@@ -34,38 +34,73 @@ const youtubeFeatureData = {
 const bottomVideosData = [
   {
     id: 801,
+    title: "PEREZ HILTON FACES LONG RECOVERY AFTER LIVESTREAM INCIDENT |..",
+    excerpt: "PEREZ HILTON FACES LONG RECOVERY AFTER LIVESTREAM INCIDENT -- US blogger Perez..",
+    duration: "00:37",
+    image: "https://picsum.photos/seed/perezhilton/800/600"
+  },
+  {
+    id: 802,
+    title: "AUSTRALIA FACES EXTINCTION CRISIS AS NUMBAT OFFERS HOPE | Jadetimes",
+    excerpt: "AUSTRALIA FACES EXTINCTION CRISIS AS NUMBAT OFFERS HOPE -- Australia is facing a..",
+    duration: "00:37",
+    image: "https://picsum.photos/seed/numbat/800/600"
+  },
+  {
+    id: 803,
+    title: "Madonna Honors \"Genius\" Producer William Orbit in Emotional Tribute |...",
+    excerpt: "Madonna Honors \"Genius\" Producer William Orbit in Emotional Tribute -- Madonna has..",
+    duration: "00:50",
+    image: "https://picsum.photos/seed/madonna/800/600"
+  },
+  {
+    id: 804,
+    title: "Fernandez Claims Dominant Victory at British MotoGP in Silverstone |...",
+    excerpt: "Fernandez Claims Dominant Victory at British MotoGP in Silverstone -- Raul Fernandez..",
+    duration: "00:48",
+    image: "https://picsum.photos/seed/motogp/800/600"
+  },
+  {
+    id: 805,
     title: "Trump Pushes to Fire Fed Governor Lisa Cook After Court Ruling |...",
     excerpt: "Trump Pushes to Fire Fed Governor Lisa Cook After Court Ruling -- President Donald Trump..",
     duration: "00:38",
     image: "/images/video_trump.png"
   },
   {
-    id: 802,
+    id: 806,
     title: "Vollering Storms Back Into Yellow With Stage 8 Victory! | Jadetimes",
     excerpt: "Vollering Storms Back Into Yellow With Stage 8 Victory! -- Demi Vollering has stormed back..",
     duration: "00:34",
     image: "/images/video_vollering.png"
   },
   {
-    id: 803,
+    id: 807,
     title: "Surging Energy Prices and Shipping Threats Middle East War Could Hurt...",
     excerpt: "Surging Energy Prices and Shipping Threats: How the Middle East War Could Hurt the Glob..",
     duration: "00:31",
     image: "https://picsum.photos/seed/harborport/800/600"
   },
   {
-    id: 804,
+    id: 808,
     title: "How the War in the Middle East Is Affecting Energy, Trade, and Financ...",
     excerpt: "How the War in the Middle East Is Affecting Energy, Trade, and Finance -- The war in the..",
     duration: "00:27",
     image: "https://picsum.photos/seed/refinerynight/800/600"
   },
   {
-    id: 805,
+    id: 809,
     title: "GREEN BOOTS' BODY MAY RECOVERED FROM MOU...",
     excerpt: "GREEN BOOTS' BODY MAY FIN.. RECOVERED FROM MOUNT EV...",
     duration: "00:35",
     image: "https://picsum.photos/seed/mounteverest/800/600"
+  },
+  {
+    id: 810,
+    title: "How Autonomous Drones are Reshaping Agriculture Logistics",
+    excerpt: "How Autonomous Drones are Reshaping Agriculture Logistics -- Drones are transforming the way..",
+    duration: "00:42",
+    image: "https://picsum.photos/seed/drones/800/600"
   }
 ];
 
@@ -142,6 +177,19 @@ const threeColumnData = [
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
+  const sliderRef = useRef(null);
+
+  const handlePrevSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -sliderRef.current.clientWidth * 0.8, behavior: 'smooth' });
+    }
+  };
+
+  const handleNextSlide = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: sliderRef.current.clientWidth * 0.8, behavior: 'smooth' });
+    }
+  };
   
   // Datasets for all 20 sections
   const [latestUpdates, setLatestUpdates] = useState([]);
@@ -375,28 +423,56 @@ export default function HomePage() {
           {/* Section 18: Full-Width Youtube Hero Banner */}
           <YoutubeUpdatesHero feature={youtubeFeatureData} />
 
-          {/* Section 19: Bottom Video Thumbnail Row */}
+          {/* Section 19: Bottom Video Thumbnail Row Slider */}
           <section style={styles.bottomVideoSection}>
-            <div style={styles.bottomVideoGrid}>
-              {bottomVideosData.map((video) => (
-                <div key={video.id} style={styles.bottomVideoCard}>
-                  <div 
-                    style={{
-                      ...styles.bottomVideoThumb,
-                      backgroundImage: `url(${video.image})`
-                    }}
-                  >
-                    <div style={styles.bottomVideoPlay}>
-                      <Play size={10} fill="#ffffff" color="#ffffff" style={{ marginLeft: '1px' }} />
+            <div style={styles.bottomVideoSliderWrapper}>
+              <button 
+                onClick={handlePrevSlide}
+                style={{
+                  ...styles.sliderArrow,
+                  left: '10px'
+                }}
+                aria-label="Previous videos"
+              >
+                <ChevronLeft size={20} color="#000000" />
+              </button>
+
+              <div 
+                ref={sliderRef}
+                className="no-scrollbar"
+                style={styles.bottomVideoTrack}
+              >
+                {bottomVideosData.map((video) => (
+                  <div key={video.id} style={styles.bottomVideoCard}>
+                    <div 
+                      style={{
+                        ...styles.bottomVideoThumb,
+                        backgroundImage: `url(${video.image})`
+                      }}
+                    >
+                      <div style={styles.bottomVideoPlay}>
+                        <Play size={12} fill="#ffffff" color="#ffffff" style={{ marginLeft: '1.5px' }} />
+                      </div>
+                      <div style={styles.bottomVideoDuration}>
+                        {video.duration}
+                      </div>
                     </div>
-                    <div style={styles.bottomVideoDuration}>
-                      {video.duration}
-                    </div>
+                    <h4 style={styles.bottomVideoTitle}>{video.title}</h4>
+                    <p style={styles.bottomVideoExcerpt}>{video.excerpt}</p>
                   </div>
-                  <h4 style={styles.bottomVideoTitle}>{video.title}</h4>
-                  <p style={styles.bottomVideoExcerpt}>{video.excerpt}</p>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              <button 
+                onClick={handleNextSlide}
+                style={{
+                  ...styles.sliderArrow,
+                  right: '10px'
+                }}
+                aria-label="Next videos"
+              >
+                <ChevronRight size={20} color="#000000" />
+              </button>
             </div>
           </section>
 
@@ -661,20 +737,31 @@ const styles = {
     width: '100%'
   },
   bottomVideoSection: {
-    padding: '40px 5%',
+    padding: '40px 1% 40px 1%', // Very small padding on sides matching mockup
     width: '100%'
   },
-  bottomVideoGrid: {
-    maxWidth: '1350px',
-    margin: '0 auto',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', // Reduced min-width to accommodate 5 columns
-    gap: '24px'
+  bottomVideoSliderWrapper: {
+    position: 'relative',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    padding: '0 45px' // Space on sides for absolute arrows
+  },
+  bottomVideoTrack: {
+    display: 'flex',
+    gap: '20px',
+    overflowX: 'auto',
+    scrollBehavior: 'smooth',
+    width: '100%',
+    padding: '10px 0',
   },
   bottomVideoCard: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '10px'
+    gap: '10px',
+    flexShrink: 0,
+    width: 'calc((100% - 80px) / 5)', // On desktop, show exactly 5 items
+    minWidth: '220px' // Responsive fallback
   },
   bottomVideoThumb: {
     width: '100%',
@@ -688,7 +775,7 @@ const styles = {
     justifyContent: 'center'
   },
   bottomVideoPlay: {
-    border: '1.5px solid #ffffff', // White circle border matching Screenshot 1
+    border: '1.5px solid #ffffff',
     background: 'rgba(0, 0, 0, 0.25)',
     width: '32px',
     height: '32px',
@@ -731,5 +818,21 @@ const styles = {
     WebkitBoxOrient: 'vertical',
     overflow: 'hidden',
     fontFamily: "'Poppins', sans-serif"
+  },
+  sliderArrow: {
+    position: 'absolute',
+    top: '75px', // Exact vertical middle of thumbnails (130px height + 10px padding)
+    zIndex: 10,
+    background: '#ffffff',
+    border: '1px solid #e4e4e7',
+    borderRadius: '50%',
+    width: '36px',
+    height: '36px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+    transition: 'all 0.2s ease',
   }
 };
