@@ -619,7 +619,6 @@ const styles = {
     width: '100%'
   },
   bottomVideoSection: {
-    background: '#09090b',
     padding: '40px 5%',
     width: '100%'
   },
@@ -658,7 +657,7 @@ const styles = {
   bottomVideoTitle: {
     fontSize: '12px',
     fontWeight: '700',
-    color: '#e4e4e7',
+    color: '#18181b',
     lineHeight: '1.4',
     margin: 0,
     display: '-webkit-box',
