@@ -129,8 +129,9 @@ export default function Header({ active = "Home" }) {
 const styles = {
   header: {
     width: '100%',
-    position: 'sticky', // Restored to sticky so it stays visible at the top when scrolling
+    position: 'fixed', // Updated to fixed position to guarantee it stays at the top of the viewport
     top: 0,
+    left: 0,
     zIndex: 1000,
     boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
     background: '#ffffff' // Added solid background to prevent transparency when scrolling
