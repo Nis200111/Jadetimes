@@ -28,7 +28,11 @@ export default function Footer() {
       <div className="footer-newsletter-wrap">
         <div className="footer-newsletter-content">
           <div className="footer-logo-area">
-            <h2 className="footer-logo-title">Jadetimes</h2>
+            <img 
+              src="/images/sds_edited.avif" 
+              alt="Jadetimes Logo" 
+              style={{ height: '40px', width: 'auto', objectFit: 'contain', marginBottom: '10px', display: 'block' }} 
+            />
             <div className="footer-logo-links">
               <Link href="/advertise">Advertise with us</Link>
               <span className="footer-divider"> &nbsp;|&nbsp; </span>
