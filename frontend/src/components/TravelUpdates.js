@@ -227,8 +227,8 @@ const styles = {
     alignItems: 'center'
   },
   listThumbnailWrapper: {
-    width: '76px',
-    height: '52px',
+    width: '90px', // Increased from 76px
+    height: '62px', // Increased from 52px
     flexShrink: 0,
     overflow: 'hidden',
     background: '#f4f4f5'
@@ -239,7 +239,7 @@ const styles = {
     objectFit: 'cover'
   },
   listTitle: {
-    fontSize: '12.5px',
+    fontSize: '14px', // Increased from 12.5px
     fontWeight: '600',
     color: '#18181b',
     lineHeight: '1.4',
@@ -249,6 +249,6 @@ const styles = {
     WebkitLineClamp: '3', // Allow up to 3 lines of text wrapping
     WebkitBoxOrient: 'vertical',
     overflow: 'hidden',
-    maxWidth: '160px' // Constrain width to force wrapping to 3 lines
+    maxWidth: '180px' // Increased from 160px to match larger font size
   }
 };
