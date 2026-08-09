@@ -17,6 +17,7 @@ import WatchSegments from '../components/WatchSegments';
 import CategoryLists from '../components/CategoryLists';
 import PulseSection from '../components/PulseSection';
 import PodcastSection from '../components/PodcastSection';
+import TravelUpdates from '../components/TravelUpdates';
 import Footer from '../components/Footer';
 
 import { 
@@ -319,18 +320,8 @@ export default function HomePage() {
           {/* Section 16: Dark Podcast Section */}
           <PodcastSection podcasts={podcasts} />
 
-          {/* Section 17: Travel Updates Row */}
-          <section style={styles.newsFeedSection}>
-            <div style={styles.sectionHeader}>
-              <span style={styles.sectionIcon} />
-              <h2 style={styles.sectionTitle}>Travel Updates</h2>
-            </div>
-            <div style={styles.newsFeedGrid}>
-              {travelGrid.slice(0, 4).map((art) => (
-                <NewsCard key={art.id} article={art} />
-              ))}
-            </div>
-          </section>
+          {/* Section 17: Travel Updates */}
+          <TravelUpdates />
 
           {/* Section 18: Full-Width Military Hero Banner */}
           {militaryHero && (
