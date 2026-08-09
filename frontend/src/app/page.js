@@ -441,7 +441,7 @@ export default function HomePage() {
                   onClick={handlePrevSlide}
                   style={{
                     ...styles.sliderArrow,
-                    left: '10px'
+                    left: '15px'
                   }}
                   aria-label="Previous videos"
                 >
@@ -481,7 +481,7 @@ export default function HomePage() {
                   onClick={handleNextSlide}
                   style={{
                     ...styles.sliderArrow,
-                    right: '10px'
+                    right: '15px'
                   }}
                   aria-label="Next videos"
                 >
@@ -760,7 +760,7 @@ const styles = {
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    padding: '0 45px' // Space on sides for absolute arrows
+    padding: '0' // Removed side padding to align items with page edges
   },
   bottomVideoTrack: {
     display: 'flex',
@@ -836,7 +836,7 @@ const styles = {
   },
   sliderArrow: {
     position: 'absolute',
-    top: '75px', // Exact vertical middle of thumbnails (130px height + 10px padding)
+    top: '65px', // Perfectly centered on the 130px height thumbnails
     zIndex: 10,
     background: '#ffffff',
     border: '1px solid #e4e4e7',
