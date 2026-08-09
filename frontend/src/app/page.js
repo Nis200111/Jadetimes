@@ -31,6 +31,44 @@ const youtubeFeatureData = {
   videoId: "dQw4w9WgXcQ"
 };
 
+const bottomVideosData = [
+  {
+    id: 801,
+    title: "Trump Pushes to Fire Fed Governor Lisa Cook After Court Ruling |...",
+    excerpt: "Trump Pushes to Fire Fed Governor Lisa Cook After Court Ruling -- President Donald Trump..",
+    duration: "00:38",
+    image: "/images/video_trump.png"
+  },
+  {
+    id: 802,
+    title: "Vollering Storms Back Into Yellow With Stage 8 Victory! | Jadetimes",
+    excerpt: "Vollering Storms Back Into Yellow With Stage 8 Victory! -- Demi Vollering has stormed back..",
+    duration: "00:34",
+    image: "/images/video_vollering.png"
+  },
+  {
+    id: 803,
+    title: "Surging Energy Prices and Shipping Threats Middle East War Could Hurt...",
+    excerpt: "Surging Energy Prices and Shipping Threats: How the Middle East War Could Hurt the Glob..",
+    duration: "00:31",
+    image: "https://picsum.photos/seed/harborport/800/600"
+  },
+  {
+    id: 804,
+    title: "How the War in the Middle East Is Affecting Energy, Trade, and Financ...",
+    excerpt: "How the War in the Middle East Is Affecting Energy, Trade, and Finance -- The war in the..",
+    duration: "00:27",
+    image: "https://picsum.photos/seed/refinerynight/800/600"
+  },
+  {
+    id: 805,
+    title: "GREEN BOOTS' BODY MAY RECOVERED FROM MOU...",
+    excerpt: "GREEN BOOTS' BODY MAY FIN.. RECOVERED FROM MOUNT EV...",
+    duration: "00:35",
+    image: "https://picsum.photos/seed/mounteverest/800/600"
+  }
+];
+
 import { 
   fetchNews, 
   fetchTrending, 
@@ -340,7 +378,7 @@ export default function HomePage() {
           {/* Section 19: Bottom Video Thumbnail Row */}
           <section style={styles.bottomVideoSection}>
             <div style={styles.bottomVideoGrid}>
-              {watchBottom.slice(0, 4).map((video) => (
+              {bottomVideosData.map((video) => (
                 <div key={video.id} style={styles.bottomVideoCard}>
                   <div 
                     style={{
@@ -349,10 +387,14 @@ export default function HomePage() {
                     }}
                   >
                     <div style={styles.bottomVideoPlay}>
-                      <Play size={10} fill="#ffffff" color="#ffffff" />
+                      <Play size={10} fill="#ffffff" color="#ffffff" style={{ marginLeft: '1px' }} />
+                    </div>
+                    <div style={styles.bottomVideoDuration}>
+                      {video.duration}
                     </div>
                   </div>
                   <h4 style={styles.bottomVideoTitle}>{video.title}</h4>
+                  <p style={styles.bottomVideoExcerpt}>{video.excerpt}</p>
                 </div>
               ))}
             </div>
@@ -626,7 +668,7 @@ const styles = {
     maxWidth: '1350px',
     margin: '0 auto',
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', // Reduced min-width to accommodate 5 columns
     gap: '24px'
   },
   bottomVideoCard: {
@@ -636,7 +678,7 @@ const styles = {
   },
   bottomVideoThumb: {
     width: '100%',
-    height: '120px',
+    height: '130px',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     borderRadius: '2px',
@@ -646,16 +688,29 @@ const styles = {
     justifyContent: 'center'
   },
   bottomVideoPlay: {
-    background: 'rgba(239, 68, 68, 0.9)',
-    width: '24px',
-    height: '24px',
+    border: '1.5px solid #ffffff', // White circle border matching Screenshot 1
+    background: 'rgba(0, 0, 0, 0.25)',
+    width: '32px',
+    height: '32px',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
   },
+  bottomVideoDuration: {
+    position: 'absolute',
+    bottom: '8px',
+    right: '8px',
+    background: 'rgba(0, 0, 0, 0.75)',
+    color: '#ffffff',
+    fontSize: '11px',
+    fontWeight: '600',
+    padding: '2px 6px',
+    borderRadius: '2px',
+    fontFamily: 'monospace'
+  },
   bottomVideoTitle: {
-    fontSize: '12px',
+    fontSize: '13px',
     fontWeight: '700',
     color: '#18181b',
     lineHeight: '1.4',
@@ -663,6 +718,18 @@ const styles = {
     display: '-webkit-box',
     WebkitLineClamp: '2',
     WebkitBoxOrient: 'vertical',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    fontFamily: "'Poppins', sans-serif"
+  },
+  bottomVideoExcerpt: {
+    fontSize: '12px',
+    color: '#71717a',
+    lineHeight: '1.4',
+    margin: 0,
+    display: '-webkit-box',
+    WebkitLineClamp: '2',
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden',
+    fontFamily: "'Poppins', sans-serif"
   }
 };
