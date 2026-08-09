@@ -129,8 +129,7 @@ export default function Header({ active = "Home" }) {
 const styles = {
   header: {
     width: '100%',
-    position: 'sticky',
-    top: 0,
+    position: 'relative', // Changed from sticky to relative so it disappears on scroll
     zIndex: 1000,
     boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
   },
