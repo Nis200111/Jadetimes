@@ -96,7 +96,7 @@ export default function TravelUpdates() {
             <div style={{
               ...styles.bottomListGrid,
               gridTemplateColumns: isSmallMobile ? '1fr' : '1fr 1fr',
-              marginTop: isMobile ? '20px' : '110px' // Push down on desktop to align with bottom of featured title
+              marginTop: isMobile ? '20px' : '75px' // Slightly reduced margin to pull bottom items up
             }}>
               {bottomListItems.map((item, idx) => (
                 <div key={idx} style={styles.listItem}>
