@@ -218,8 +218,7 @@ const styles = {
   bottomListGrid: {
     display: 'grid',
     gap: '20px 24px',
-    borderTop: '1px solid #e4e4e7',
-    paddingTop: '20px'
+    marginTop: '20px' // Pushes the section down as requested
   },
   listItem: {
     display: 'flex',
