@@ -218,7 +218,7 @@ const styles = {
   bottomListGrid: {
     display: 'grid',
     gap: '20px 24px',
-    marginTop: '20px' // Pushes the section down as requested
+    marginTop: '40px' // Pushed further down as requested
   },
   listItem: {
     display: 'flex',
@@ -245,7 +245,7 @@ const styles = {
     margin: 0,
     fontFamily: "'Poppins', sans-serif",
     display: '-webkit-box',
-    WebkitLineClamp: '2',
+    WebkitLineClamp: '3', // Allow up to 3 lines of text wrapping
     WebkitBoxOrient: 'vertical',
     overflow: 'hidden'
   }
