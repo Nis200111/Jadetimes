@@ -843,7 +843,6 @@ h4 {
 
 .footer-categories-wrap {
   padding: 16px 20px; /* Reduced side padding */
-  border-bottom: 1px solid #e4e4e7;
 }
 
 .footer-categories-content {
@@ -854,6 +853,9 @@ h4 {
   align-items: center;
   gap: 12px;
   width: 100%;
+  border-top: 1px solid #e4e4e7; /* Top line starts/ends aligned with text grid */
+  border-bottom: 1px solid #e4e4e7; /* Bottom line starts/ends aligned with text grid */
+  padding: 14px 0; /* Padding inside the border lines */
 }
 
 .footer-categories-list {
@@ -897,6 +899,7 @@ h4 {
 
 .footer-divider {
   color: #e4e4e7;
+  margin: 0 10px; /* Increased margin for spacious dividers matching Screenshot 2 */
 }
 
 .footer-bottom-wrap {

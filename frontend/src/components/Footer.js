@@ -114,15 +114,15 @@ export default function Footer() {
                   >
                     {link}
                   </Link>
-                  <span className="footer-divider"> &nbsp;|&nbsp; </span>
+                  <span className="footer-divider">|</span>
                 </React.Fragment>
               ))}
               <span className="footer-legal-link">To report security issues email us at info@jadetimes.com</span>
-              <span className="footer-divider"> &nbsp;|&nbsp; </span>
+              <span className="footer-divider">|</span>
               <Link href="/shop" className="footer-legal-link">Jadetimes Shop</Link>
-              <span className="footer-divider"> &nbsp;|&nbsp; </span>
+              <span className="footer-divider">|</span>
               <Link href="/blogs" className="footer-legal-link">Blogs</Link>
-              <span className="footer-divider"> &nbsp;|&nbsp; </span>
+              <span className="footer-divider">|</span>
               <span className="footer-disclaimer-text">
                 The JadeTimes holds no responsibility for the content of external websites. 
                 For more information, please review our policy on external linking.
