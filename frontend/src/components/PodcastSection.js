@@ -531,30 +531,31 @@ const styles = {
   rightColumn: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '14px',
+    gap: '16px',
     color: '#ffffff'
   },
   spotifyUpdatesBadge: {
     alignSelf: 'flex-start',
-    background: '#1c1c1e',
+    background: '#3f3f46', // Lighter grey background matching Screenshot 1
     color: '#ffffff',
-    fontSize: '9.5px',
+    fontSize: '10px',
     fontWeight: '600',
     padding: '4px 10px',
-    letterSpacing: '0.5px',
+    letterSpacing: '1px',
     borderRadius: '2px',
     fontFamily: "'Poppins', sans-serif"
   },
   updatesTitle: {
-    fontSize: '17px',
-    fontWeight: '600',
-    lineHeight: '1.35',
+    fontSize: '24px', // Larger font size matching Screenshot 1
+    fontWeight: '700',
+    lineHeight: '1.3',
+    color: '#ffffff', // Bright white color
     margin: 0,
     fontFamily: "'Poppins', sans-serif"
   },
   updatesDescription: {
-    fontSize: '12px',
-    color: '#d1d1d6',
+    fontSize: '14px', // Standard Poppins body size
+    color: '#ffffff', // Bright white text matching Screenshot 1
     lineHeight: '1.6',
     margin: 0,
     fontFamily: "'Poppins', sans-serif"
@@ -562,11 +563,12 @@ const styles = {
   linksRow: {
     display: 'flex',
     gap: '24px',
-    marginTop: '6px'
+    marginTop: '8px'
   },
   link: {
-    fontSize: '12.5px',
-    fontWeight: '500',
+    fontSize: '14px',
+    fontWeight: '600',
+    color: '#ffffff', // Bright white links
     textDecoration: 'none',
     transition: 'color 0.2s',
     fontFamily: "'Poppins', sans-serif"
