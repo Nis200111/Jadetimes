@@ -18,7 +18,18 @@ import CategoryLists from '../components/CategoryLists';
 import PulseSection from '../components/PulseSection';
 import PodcastSection from '../components/PodcastSection';
 import TravelUpdates from '../components/TravelUpdates';
+import YoutubeUpdatesHero from '../components/YoutubeUpdatesHero';
 import Footer from '../components/Footer';
+
+const youtubeFeatureData = {
+  id: 39,
+  title: "Why Did Trump Delay Strikes on Iran Again",
+  description: "President Donald Trump has once again delayed a major escalation in the Iran war, extending a deadline to strike Iran's energy infrastructure until April 8. The move signals a possible window for diplomacy, even as fighting intensifies between Iran and Israel.",
+  channel: "Jadetimes",
+  image: "/images/soldier_sunset.png",
+  playerImage: "/images/yt_thumbnail.png",
+  videoId: "dQw4w9WgXcQ"
+};
 
 import { 
   fetchNews, 
@@ -323,26 +334,8 @@ export default function HomePage() {
           {/* Section 17: Travel Updates */}
           <TravelUpdates />
 
-          {/* Section 18: Full-Width Military Hero Banner */}
-          {militaryHero && (
-            <section style={styles.militarySection}>
-              <div 
-                style={{
-                  ...styles.militaryBanner,
-                  backgroundImage: `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.85)), url(${militaryHero.image})`
-                }}
-              >
-                <div style={styles.militaryContent}>
-                  <span className={`category-tag-badge ${militaryHero.category ? `${militaryHero.category.toLowerCase().replace(' ', '-')}-tag` : 'political-tag'}`}>{militaryHero.category}</span>
-                  <h3 style={styles.militaryTitle}>{militaryHero.title}</h3>
-                  <p style={styles.militaryDesc}>{militaryHero.description}</p>
-                  <Link href={`/article/${militaryHero.id}`} style={styles.militaryBtn}>
-                    Read Coverage
-                  </Link>
-                </div>
-              </div>
-            </section>
-          )}
+          {/* Section 18: Full-Width Youtube Hero Banner */}
+          <YoutubeUpdatesHero feature={youtubeFeatureData} />
 
           {/* Section 19: Bottom Video Thumbnail Row */}
           <section style={styles.bottomVideoSection}>

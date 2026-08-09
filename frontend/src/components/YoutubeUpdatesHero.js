@@ -44,7 +44,7 @@ export default function YoutubeUpdatesHero({ feature }) {
               aria-label={`Play video: ${feature.title}`}
             >
               <Image
-                src={feature.image}
+                src={feature.playerImage || feature.image}
                 alt={feature.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 340px"
