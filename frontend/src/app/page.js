@@ -28,6 +28,68 @@ import {
   fetchPodcasts 
 } from '../services/api';
 
+const threeColumnData = [
+  {
+    type: 'list',
+    featured: {
+      title: "Social Media's Growing Influence on Elections Raises Global Concerns",
+      image: "/images/0b3a43_9877c19093db4888be12f3638f7d0cd0~mv2.avif",
+      id: 32
+    },
+    items: [
+      {
+        title: "The Future of Tech Careers",
+        image: "/images/0b3a43_75181dff76a6414fb5436647c5676229~mv2.avif",
+        id: 321
+      },
+      {
+        title: "The New Silk Road: Re-engineering Global Trade Routes",
+        image: "/images/0b3a43_aba6efc6c06b43c7945d5cec79a09981~mv2.avif",
+        id: 322
+      },
+      {
+        title: "Rogue Agents or Marketing Stunt? The Unsettling Truth...",
+        image: "/images/e9a65f_3ce2b6fa19d24b2da5901097af01891f~mv2.avif",
+        id: 323
+      }
+    ]
+  },
+  {
+    type: 'single',
+    featured: {
+      title: "Can Australia Challenge China's Rare Earth Dominance? A Deep Dive into Anthony Albanese's Strategic Minerals Plan",
+      description: "Can Australia Challenge China's Rare Earth Dominance? A Deep Dive into Anthony Albanese's Strategic Minerals Plan",
+      image: "/images/Special Stocks.avif",
+      id: 33
+    }
+  },
+  {
+    type: 'list',
+    featured: {
+      title: "Authorities Requested Motive in Mass Shooting at the Fast Food Restaurant in Idaho",
+      image: "/images/6271b2_0f57dfb91c344deab0872a3a4875df3f~mv2.avif",
+      id: 34
+    },
+    items: [
+      {
+        title: "The Invisible Enemy: Why Is Dengue Spreading So Rapidly...",
+        image: "/images/0b3a43_9158337bd05f4449809ef7618c616e00~mv2.avif",
+        id: 341
+      },
+      {
+        title: "Authorities Requested Motive in Mass Shooting at the Fast...",
+        image: "/images/6271b2_0f57dfb91c344deab0872a3a4875df3f~mv2.avif",
+        id: 342
+      },
+      {
+        title: "Who Owns You After You Die? The Messy Law of Digital...",
+        image: "/images/image4.avif",
+        id: 343
+      }
+    ]
+  }
+];
+
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
   
@@ -70,8 +132,8 @@ export default function HomePage() {
         // 5. Category Tiles Row
         setCategoryTiles(newsData.filter(item => [5, 6, 7, 8].includes(item.id)));
 
-        // 6. More News Feed (8 items: 9 to 16)
-        setMoreNewsGrid(newsData.filter(item => item.id >= 9 && item.id <= 16));
+        // 6. More News Feed (10 items: starting from index 8)
+        setMoreNewsGrid(newsData.slice(8, 18));
 
         // 8. Spotlight Article (Japan solid fuel launch)
         setSpotlightArticle(newsData.find(item => item.id === 17) || newsData[0]);
@@ -138,15 +200,14 @@ export default function HomePage() {
           {/* Section 5: Category Tiles Row */}
           <CategoryTiles articles={categoryTiles} />
 
-          {/* Section 6: More News Feed (8 cards in 2x4 layout) */}
+          {/* Section 6: More News Feed (10 cards in 2x5 layout) */}
           <section style={styles.newsFeedSection}>
-            <div style={styles.sectionHeader}>
-              <span style={styles.sectionIcon} />
-              <h2 style={styles.sectionTitle}>More News</h2>
+            <div style={styles.moreNewsHeader}>
+              <h2 style={styles.moreNewsTitle}>More News</h2>
             </div>
-            <div style={styles.newsFeedGrid}>
+            <div style={styles.moreNewsGridContainer}>
               {moreNewsGrid.map((art) => (
-                <NewsCard key={art.id} article={art} />
+                <NewsCard key={art.id} article={art} variant="clean" />
               ))}
             </div>
           </section>
@@ -155,6 +216,7 @@ export default function HomePage() {
           <FullWidthAd 
             title="JadeTimes Weekly Premium Magazine"
             description="Unlock structural investigative analyses, climate logs, and live conference updates. Bundles start at $4.99/mo."
+            image="/images/0801ba_1b9737a2f498470c9abad2e6d85b543f~mv2.avif"
           />
 
           {/* Section 8: Two-Column rocket spotlight and trending list */}
@@ -167,7 +229,7 @@ export default function HomePage() {
           <FullWidthAd 
             title="Premium Balanced Nutrition For Active Companions"
             description="Switch to our high-protein natural grain matrices approved by leading veterinary wellness labs."
-            buttonText="Buy Exclusive Support"
+            image="/images/Special Stocks.avif"
           />
 
           {/* Section 10 & 11: Must Watch Top Segments & Small thumbnail row */}
@@ -182,13 +244,14 @@ export default function HomePage() {
 
           {/* Section 13: News Updates | Sports Row */}
           <section style={styles.newsFeedSection}>
-            <div style={styles.sectionHeader}>
-              <span style={styles.sectionIcon} />
-              <h2 style={styles.sectionTitle}>News Updates | Sports</h2>
+            <div style={styles.sportsHeader}>
+              <h2 style={styles.sportsTitle}>
+                News Updates <span style={{ fontWeight: '400', color: '#71717a' }}>| Sports</span>
+              </h2>
             </div>
-            <div style={styles.newsFeedGrid}>
-              {sportsGrid.slice(0, 4).map((art) => (
-                <NewsCard key={art.id} article={art} />
+            <div style={styles.sportsGridContainer}>
+              {sportsGrid.slice(0, 5).map((art) => (
+                <NewsCard key={art.id} article={art} variant="flat" />
               ))}
             </div>
           </section>
@@ -199,9 +262,57 @@ export default function HomePage() {
           {/* Section 15: 3-Column Image Card Row */}
           <section style={styles.newsFeedSection}>
             <div style={styles.threeColumnGrid}>
-              {threeColumnRow.map((art) => (
-                <NewsCard key={art.id} article={art} />
-              ))}
+              {threeColumnData.map((col, idx) => {
+                if (col.type === 'single') {
+                  return (
+                    <div key={idx} style={styles.columnWrapper}>
+                      <Link href={`/article/${col.featured.id}`} style={{ textDecoration: 'none' }}>
+                        <div style={styles.middleImageContainer}>
+                          <Image 
+                            src={col.featured.image} 
+                            alt={col.featured.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            style={{ objectFit: 'cover' }}
+                          />
+                        </div>
+                        <h3 style={styles.middleTitle}>{col.featured.title}</h3>
+                        <p style={styles.middleDesc}>{col.featured.description}</p>
+                      </Link>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div key={idx} style={styles.columnWrapper}>
+                    <Link href={`/article/${col.featured.id}`} style={{ textDecoration: 'none' }}>
+                      <div style={styles.columnImageContainer}>
+                        <Image 
+                          src={col.featured.image} 
+                          alt={col.featured.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
+                      <h3 style={styles.columnTitle}>{col.featured.title}</h3>
+                    </Link>
+
+                    <div style={styles.listWrapper}>
+                      {col.items.map((item, itemIdx) => (
+                        <Link href={`/article/${item.id}`} key={itemIdx} style={styles.listItem}>
+                          <img 
+                            src={item.image} 
+                            alt={item.title}
+                            style={styles.listThumbnail}
+                          />
+                          <h4 style={styles.listTitle}>{item.title}</h4>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </section>
 
@@ -308,7 +419,7 @@ const styles = {
   },
   newsFeedSection: {
     maxWidth: '1350px',
-    margin: '30px auto',
+    margin: '50px auto',  /* INCREASED from 30px */
     padding: '0 5%',
     display: 'flex',
     flexDirection: 'column'
@@ -316,37 +427,56 @@ const styles = {
   sectionHeader: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
-    borderBottom: '2px solid #18181b',
-    paddingBottom: '8px',
-    marginBottom: '20px'
+    gap: '12px',  /* INCREASED from 8px */
+    borderBottom: '3px solid #18181b',  /* INCREASED from 2px */
+    paddingBottom: '12px',  /* INCREASED from 8px */
+    marginBottom: '28px'  /* INCREASED from 20px */
   },
   sectionIcon: {
-    width: '8px',
-    height: '8px',
-    background: '#ef4444'
+    width: '10px',  /* INCREASED from 8px */
+    height: '10px',
+    background: '#ef4444',
+    borderRadius: '2px'
   },
   sectionTitle: {
-    fontSize: '15px',
+    fontSize: '16px',  /* INCREASED from 15px */
     fontWeight: '800',
     textTransform: 'uppercase',
-    letterSpacing: '0.5px',
+    letterSpacing: '0.6px',  /* INCREASED from 0.5px */
     color: '#18181b',
     margin: 0
   },
   newsFeedGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',  /* INCREASED minmax from 250px */
+    gap: '32px'  /* INCREASED from 24px */
+  },
+  moreNewsHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    borderBottom: '2px solid #ef4444',
+    paddingBottom: '8px',
+    marginBottom: '24px'
+  },
+  moreNewsTitle: {
+    fontSize: '20px',
+    fontWeight: '700',
+    color: '#18181b',
+    margin: 0
+  },
+  moreNewsGridContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
     gap: '24px'
   },
   threeColumnGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: '24px'
+    gap: '32px'  /* INCREASED from 24px */
   },
   militarySection: {
     maxWidth: '1350px',
-    margin: '40px auto',
+    margin: '60px auto',  /* INCREASED from 40px */
     padding: '0 5%'
   },
   militaryBanner: {
@@ -402,14 +532,110 @@ const styles = {
     borderRadius: '2px',
     alignSelf: 'flex-start',
     letterSpacing: '0.5px',
-    transition: 'background 0.2s',
+    transition: 'all 0.3s ease',
     marginTop: '8px',
+    display: 'inline-block',
+    boxShadow: '0 4px 12px rgba(239, 68, 68, 0.25)',
     ':hover': {
-      background: '#dc2626'
+      background: '#dc2626',
+      boxShadow: '0 6px 16px rgba(239, 68, 68, 0.35)',
+      transform: 'translateY(-2px)'
     }
   },
+  sportsHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    borderBottom: '2px solid #ef4444',
+    paddingBottom: '8px',
+    marginBottom: '24px'
+  },
+  sportsTitle: {
+    fontSize: '20px',
+    fontWeight: '700',
+    color: '#18181b',
+    margin: 0
+  },
+  columnWrapper: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  columnImageContainer: {
+    position: 'relative',
+    width: '100%',
+    height: '180px',
+    background: '#f4f4f5',
+    overflow: 'hidden'
+  },
+  columnTitle: {
+    fontSize: '14.5px',
+    fontWeight: '700',
+    color: '#18181b',
+    lineHeight: '1.4',
+    margin: '12px 0 16px 0',
+    display: '-webkit-box',
+    WebkitLineClamp: '2',
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden'
+  },
+  middleImageContainer: {
+    position: 'relative',
+    width: '100%',
+    height: '290px',
+    background: '#f4f4f5',
+    overflow: 'hidden'
+  },
+  middleTitle: {
+    fontSize: '16.5px',
+    fontWeight: '700',
+    color: '#18181b',
+    lineHeight: '1.35',
+    margin: '16px 0 8px 0'
+  },
+  middleDesc: {
+    fontSize: '13px',
+    color: '#52525b',
+    lineHeight: '1.5',
+    margin: 0
+  },
+  listWrapper: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  listItem: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '12px',
+    borderTop: '1px solid #e4e4e7',
+    padding: '12px 0',
+    alignItems: 'center',
+    textDecoration: 'none'
+  },
+  listThumbnail: {
+    width: '80px',
+    height: '55px',
+    objectFit: 'cover',
+    borderRadius: '0px',
+    flexShrink: 0
+  },
+  listTitle: {
+    fontSize: '12.5px',
+    fontWeight: '500',
+    color: '#18181b',
+    lineHeight: '1.4',
+    margin: 0,
+    display: '-webkit-box',
+    WebkitLineClamp: '2',
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden'
+  },
+  sportsGridContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(5, 1fr)',
+    gap: '20px',
+    width: '100%'
+  },
   bottomVideoSection: {
-    background: '#09090b', // Dark zinc bar matching multimedia
+    background: '#09090b',
     padding: '40px 5%',
     width: '100%'
   },

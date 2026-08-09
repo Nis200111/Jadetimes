@@ -23,7 +23,6 @@ export default function CategoryLists({ breakdown }) {
               <div key={reg.key} style={styles.column}>
                 {/* Column Header */}
                 <div style={styles.colHeader}>
-                  <span style={styles.redDot} />
                   <h3 style={styles.colTitle}>{reg.title}</h3>
                 </div>
                 
@@ -33,7 +32,6 @@ export default function CategoryLists({ breakdown }) {
                     <Link key={item.id} href="/" style={styles.itemLink}>
                       <div style={styles.listItem}>
                         <p style={styles.itemTitle}>{item.title}</p>
-                        <span style={styles.itemDate}>Read Article →</span>
                       </div>
                     </Link>
                   ))}
@@ -49,10 +47,9 @@ export default function CategoryLists({ breakdown }) {
 
 const styles = {
   section: {
-    padding: '30px 5%',
+    padding: '40px 5%',
     background: '#ffffff',
-    width: '100%',
-    borderBottom: '1px solid #e4e4e7'
+    width: '100%'
   },
   container: {
     maxWidth: '1350px',
@@ -61,7 +58,7 @@ const styles = {
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-    gap: '30px'
+    gap: '40px'
   },
   column: {
     display: 'flex',
@@ -70,57 +67,39 @@ const styles = {
   colHeader: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
-    borderBottom: '2px solid #18181b',
+    borderBottom: '1px solid #18181b',
     paddingBottom: '8px',
-    marginBottom: '16px'
-  },
-  redDot: {
-    width: '6px',
-    height: '6px',
-    background: '#ef4444',
-    borderRadius: '50%'
+    marginBottom: '20px'
   },
   colTitle: {
-    fontSize: '14px',
-    fontWeight: '800',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
+    fontSize: '16px',
+    fontWeight: '700',
     color: '#18181b',
     margin: 0
   },
   listContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '12px'
+    gap: '20px'
   },
   itemLink: {
     display: 'block',
-    padding: '6px 0',
+    textDecoration: 'none',
     transition: 'opacity 0.2s'
   },
   listItem: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: '4px'
+    flexDirection: 'column'
   },
   itemTitle: {
-    fontSize: '13px',
-    fontWeight: '700',
-    lineHeight: '1.4',
-    color: '#27272a',
+    fontSize: '14.5px',
+    fontWeight: '400',
+    lineHeight: '1.5',
+    color: '#18181b',
     margin: 0,
     cursor: 'pointer',
     ':hover': {
       color: '#ef4444'
     }
-  },
-  itemDate: {
-    fontSize: '9.5px',
-    color: '#ef4444',
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: '0.4px',
-    marginTop: '2px'
   }
 };

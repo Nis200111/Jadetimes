@@ -2,41 +2,64 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function CategoryTiles({ articles }) {
   // We need exactly 4 articles for the category tiles
   const tiles = articles ? articles.slice(0, 4) : [];
 
+  // Fallback descriptions for mock articles to match Screenshot 2 UI layout
+  const fallbacks = [
+    "The 2026 FIFA World Cup continues to capture global attention as major teams prepare for crucial matches in London Arena.",
+    "The Reserve Bank of Australia announced today that it will keep key interest rates unchanged but warns that the inflation battle is not over.",
+    "A major international telecommunications consortium announces strategic subsea fiber rings to expand internet connectivity across Asia and Africa.",
+    "The rivalry between US and Iran strengthening is further evidence of growing geopolitical challenges to interim peace and global stability."
+  ];
+
   return (
     <section style={styles.section}>
       <div style={styles.container}>
-        {/* Left Side: 4 Category Card Tiles */}
-        <div style={styles.tilesGrid}>
-          {tiles.map((item, idx) => (
-            <Link key={item.id || idx} href={`/category/${item.category?.toLowerCase()}`} style={styles.tileCard}>
-              <div 
-                style={{
-                  ...styles.tileImageContainer,
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url(${item.image})`
-                }}
-              >
-                <div style={styles.tileContent}>
-                  <span className={`category-tag-badge ${item.category ? `${item.category.toLowerCase()}-tag` : 'political-tag'}`}>{item.category}</span>
-                  <h3 style={styles.tileTitle}>{item.title}</h3>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {/* Left Side: 4 Category Card Tiles in a row */}
+        {tiles.map((item, idx) => (
+          <Link key={item.id || idx} href={`/category/${item.category?.toLowerCase()}`} style={styles.tileCard}>
+            <div style={styles.tileImageContainer}>
+              <Image 
+                src={item.image} 
+                alt={item.title} 
+                fill 
+                sizes="(max-width: 768px) 100vw, 20vw"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
+            <div style={styles.tileContent}>
+              <span style={styles.tileCategory}>
+                {item.category}
+              </span>
+              <h3 style={styles.tileTitle}>
+                {item.title}
+              </h3>
+              <p style={styles.tileDesc}>
+                {item.description || fallbacks[idx] || "Get the latest updates and editorial analysis on this category from JadeTimes coverage."}
+              </p>
+            </div>
+          </Link>
+        ))}
 
-        {/* Right Side: Sidebar Ad Box */}
-        <div style={styles.sidebarAd}>
-          <div style={styles.adTag}>ADVERTISEMENT</div>
-          <div style={styles.adContent}>
-            <h4 style={styles.adHeadline}>Upgrade to Premium</h4>
-            <p style={styles.adBody}>Get unlimited access to expert editorial insights, premium digests, and live research conferences.</p>
-            <Link href="/subscribe" style={styles.adBtn}>
-              Subscribe Now
+        {/* Right Side: Sidebar Ad Box with Image and Buttons */}
+        <div style={styles.sidebarAdContainer}>
+          <div style={styles.adImageWrapper}>
+            <img 
+              src="/images/6271b2_0f57dfb91c344deab0872a3a4875df3f~mv2.avif" 
+              alt="Advance Graphic Design Service Advertisement" 
+              style={styles.adImage}
+            />
+          </div>
+          <div style={styles.adButtonsRow}>
+            <Link href="/latest" style={styles.latestUpdatesBtn}>
+              LATEST UPDATES
+            </Link>
+            <Link href="/read-more" style={styles.readMoreBtn}>
+              Read More
             </Link>
           </div>
         </div>
@@ -54,116 +77,119 @@ const styles = {
   container: {
     maxWidth: '1350px',
     margin: '0 auto',
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '30px',
-    flexWrap: 'wrap'
-  },
-  tilesGrid: {
-    flex: '1 1 70%',
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '20px',
-    minWidth: '300px'
+    gap: '32px',
+    alignItems: 'stretch'
   },
   tileCard: {
-    display: 'block',
+    display: 'flex',
+    flexDirection: 'column',
+    background: '#ffffff',
+    border: '1px solid #e4e4e7',
     borderRadius: '4px',
     overflow: 'hidden',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
-    transition: 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-    height: '240px',
-    position: 'relative',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+    transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+    height: '350px',
+    cursor: 'pointer',
+    textDecoration: 'none',
     ':hover': {
-      transform: 'translateY(-4px)'
+      transform: 'translateY(-6px)',
+      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)'
     }
   },
   tileImageContainer: {
+    position: 'relative',
     width: '100%',
-    height: '100%',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    display: 'flex',
-    alignItems: 'flex-end',
-    padding: '16px'
+    height: '135px',
+    background: '#f4f4f5',
+    overflow: 'hidden'
   },
   tileContent: {
+    padding: '16px',
     display: 'flex',
     flexDirection: 'column',
-    gap: '6px'
+    gap: '8px',
+    flexGrow: 1
   },
-  tileTag: {
-    background: '#ef4444',
-    color: '#ffffff',
-    fontSize: '10px',
-    fontWeight: '800',
-    textTransform: 'uppercase',
-    padding: '3px 8px',
-    borderRadius: '2px',
-    alignSelf: 'flex-start',
-    letterSpacing: '0.5px'
+  tileCategory: {
+    fontSize: '13px',
+    color: '#71717a',
+    fontWeight: '500',
+    textTransform: 'capitalize',
+    letterSpacing: '0.2px'
   },
   tileTitle: {
     fontFamily: "var(--font-primary)",
-    fontSize: '14px',
+    fontSize: '14.5px',
     fontWeight: '700',
-    color: '#ffffff',
+    color: '#18181b',
     lineHeight: '1.4',
     margin: 0,
-    textShadow: '0 2px 4px rgba(0, 0, 0, 0.4)'
+    display: '-webkit-box',
+    WebkitLineClamp: '3',
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden'
   },
-  sidebarAd: {
-    flex: '1 1 24%',
-    minWidth: '260px',
-    background: '#18181b', // Dark zinc ad background
-    borderRadius: '4px',
-    padding: '24px',
+  tileDesc: {
+    fontSize: '11.5px',
+    color: '#71717a',
+    lineHeight: '1.45',
+    margin: 0,
+    display: '-webkit-box',
+    WebkitLineClamp: '3',
+    WebkitBoxOrient: 'vertical',
+    overflow: 'hidden'
+  },
+  sidebarAdContainer: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    border: '1px solid #27272a',
-    color: '#ffffff',
-    height: '240px'
+    height: '350px'
   },
-  adTag: {
-    fontSize: '9px',
-    color: '#71717a',
-    fontWeight: '800',
-    letterSpacing: '1px',
-    textTransform: 'uppercase'
+  adImageWrapper: {
+    width: '100%',
+    flexGrow: 1,
+    borderRadius: '4px',
+    overflow: 'hidden',
+    border: '1px solid #e4e4e7',
+    position: 'relative',
+    background: '#000000'
   },
-  adContent: {
+  adImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    display: 'block'
+  },
+  adButtonsRow: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-    margin: 'auto 0'
+    alignItems: 'center',
+    gap: '16px',
+    marginTop: '12px',
+    flexShrink: 0
   },
-  adHeadline: {
-    fontSize: '18px',
-    fontWeight: '800',
+  latestUpdatesBtn: {
+    background: '#1c1917',
     color: '#ffffff',
-    lineHeight: '1.2'
-  },
-  adBody: {
-    fontSize: '11.5px',
-    color: '#a1a1aa',
-    lineHeight: '1.4',
-    margin: 0
-  },
-  adBtn: {
-    background: '#ef4444',
-    color: '#ffffff',
-    fontSize: '11px',
+    fontSize: '10px',
     fontWeight: '800',
-    textAlign: 'center',
-    padding: '8px 0',
-    borderRadius: '2px',
+    padding: '8px 14px',
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
-    marginTop: '12px',
+    textDecoration: 'none',
+    display: 'inline-block',
     transition: 'background 0.2s',
-    ':hover': {
-      background: '#dc2626'
-    }
+    cursor: 'pointer',
+    textAlign: 'center'
+  },
+  readMoreBtn: {
+    color: '#18181b',
+    fontSize: '11.5px',
+    fontWeight: '700',
+    textDecoration: 'none',
+    transition: 'color 0.2s',
+    cursor: 'pointer'
   }
 };

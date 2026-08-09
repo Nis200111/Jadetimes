@@ -3,43 +3,53 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function PulseSection({ article }) {
-  if (!article) return null;
-
+export default function PulseSection() {
   return (
     <section style={styles.section}>
       <div style={styles.container}>
         {/* Section Header */}
-        <div style={styles.sectionHeader}>
-          <span style={styles.sectionIcon} />
-          <h2 style={styles.sectionTitle}>Exclusive Pulse</h2>
+        <div style={styles.pulseHeader}>
+          <h2 style={styles.pulseTitle}>
+            Exclusive Pulse <span style={{ fontWeight: '400', color: '#a1a1aa' }}>| Jadetimes</span>
+          </h2>
         </div>
 
-        {/* Featured Dark Cover Card */}
-        <Link href={`/article/${article.id}`} style={styles.darkCard}>
-          <div style={styles.cardSplit}>
-            {/* Left side: content */}
-            <div style={styles.contentCol}>
-              <span className="category-tag-badge exclusive-tag">EXCLUSIVE ANALYSIS</span>
-              <h3 style={styles.titleText}>{article.title}</h3>
-              <p style={styles.descriptionText}>{article.description}</p>
-              
-              <div style={styles.metaRow}>
-                <span>By JadeTimes Investigative Unit</span>
-                <span>•</span>
-                <span>{article.readTime}</span>
-              </div>
-            </div>
-            
-            {/* Right side: image */}
-            <div 
-              style={{
-                ...styles.imageCol,
-                backgroundImage: `url(${article.image})`
-              }}
+        {/* Featured Video Card */}
+        <div style={styles.cardSplit}>
+          {/* Left side: YouTube Embed */}
+          <div style={styles.videoCol}>
+            <iframe 
+              width="100%" 
+              height="360" 
+              src="https://www.youtube.com/embed/ITPpLCUg0Vo" 
+              title="Dark Side of Bollywood | Watch Before You Start Your Acting & Modeling Journey" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowFullScreen
+              style={{ borderRadius: '0px', border: 'none', display: 'block' }}
             />
           </div>
-        </Link>
+
+          {/* Right side: content */}
+          <div style={styles.contentCol}>
+            <span style={styles.badge}>YouTube Updates</span>
+            <h3 style={styles.titleText}>
+              Dark Side of Bollywood | Watch Before You Start Your Acting & Modeling Journey
+            </h3>
+            <p style={styles.descriptionText}>
+              Welcome to &ldquo;Exclusive Pulse&rdquo; by JadeTimes Media LLC. In this episode, Nivedithaa charkrapani interviews special guest Prof. Simranjit Singh, a Film director &amp; Assistant Professor to discuss two major topics impacting Dark Side of Bollywood.
+            </p>
+            
+            <Link 
+              href="https://www.youtube.com/watch?v=ITPpLCUg0Vo" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={styles.readMore}
+            >
+              Read More &gt;
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -48,102 +58,79 @@ export default function PulseSection({ article }) {
 const styles = {
   section: {
     padding: '40px 5%',
-    background: '#09090b', // Rich dark theme
+    background: '#000000', // Pure black background
     color: '#ffffff',
-    width: '100%',
-    borderTop: '1px solid #18181b',
-    borderBottom: '1px solid #18181b'
+    width: '100%'
   },
   container: {
     maxWidth: '1350px',
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
-    gap: '24px'
+    gap: '30px'
   },
-  sectionHeader: {
+  pulseHeader: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
-    borderBottom: '2px solid #27272a',
+    borderBottom: '2px solid #ef4444',
     paddingBottom: '8px',
-    marginBottom: '10px'
+    marginBottom: '20px'
   },
-  sectionIcon: {
-    width: '8px',
-    height: '8px',
-    background: '#ef4444'
-  },
-  sectionTitle: {
-    fontSize: '15px',
-    fontWeight: '800',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
+  pulseTitle: {
+    fontSize: '20px',
+    fontWeight: '700',
     color: '#ffffff',
     margin: 0
-  },
-  darkCard: {
-    display: 'block',
-    background: '#18181b', // Dark zinc card fill
-    borderRadius: '4px',
-    overflow: 'hidden',
-    border: '1px solid #27272a',
-    transition: 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-    ':hover': {
-      transform: 'translateY(-2px)'
-    }
   },
   cardSplit: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    minHeight: '300px'
+    gap: '40px',
+    alignItems: 'center'
+  },
+  videoCol: {
+    flex: '1 1 50%',
+    minWidth: '320px'
   },
   contentCol: {
-    flex: '1 1 50%',
-    padding: '40px',
+    flex: '1 1 40%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     gap: '16px',
-    minWidth: '280px'
+    minWidth: '280px',
+    justifyContent: 'center'
   },
-  exclusiveBadge: {
-    color: '#ef4444',
-    fontSize: '10px',
-    fontWeight: '900',
-    letterSpacing: '1px',
-    textTransform: 'uppercase'
+  badge: {
+    alignSelf: 'flex-start',
+    background: '#27272a',
+    color: '#ffffff',
+    fontSize: '11px',
+    fontWeight: '600',
+    padding: '4px 10px',
+    borderRadius: '2px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px'
   },
   titleText: {
-    fontFamily: "var(--font-primary)",
-    fontSize: '28px',
-    fontWeight: '700',
+    fontSize: '22px',
+    fontWeight: '400',
     color: '#ffffff',
-    lineHeight: '1.2',
+    lineHeight: '1.45',
     margin: 0
   },
   descriptionText: {
-    fontSize: '13.5px',
+    fontSize: '14px',
     color: '#a1a1aa',
     lineHeight: '1.6',
     margin: 0
   },
-  metaRow: {
-    display: 'flex',
-    gap: '10px',
-    color: '#71717a',
-    fontSize: '11px',
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    marginTop: '10px'
-  },
-  imageCol: {
-    flex: '1 1 50%',
-    minWidth: '280px',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    minHeight: '260px'
+  readMore: {
+    color: '#ffffff',
+    textDecoration: 'none',
+    fontSize: '14px',
+    fontWeight: '500',
+    marginTop: '8px',
+    display: 'inline-block'
   }
 };

@@ -3,7 +3,26 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function FullWidthAd({ title = "Exclusive Weekly Magazine", description = "Subscribe to unlock deep investigative reporting, digital archives, and daily global briefings.", buttonText = "Unlock Premium Now" }) {
+export default function FullWidthAd({ 
+  title = "Exclusive Weekly Magazine", 
+  description = "Subscribe to unlock deep investigative reporting, digital archives, and daily global briefings.", 
+  buttonText = "Unlock Premium Now",
+  image = null
+}) {
+  if (image) {
+    return (
+      <section style={styles.section}>
+        <div style={styles.imageAdContainer}>
+          <img 
+            src={image} 
+            alt={title} 
+            style={styles.imageAd} 
+          />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section style={styles.section}>
       <div style={styles.adBanner}>
@@ -91,5 +110,19 @@ const styles = {
     ':hover': {
       background: '#dc2626'
     }
+  },
+  imageAdContainer: {
+    maxWidth: '950px',
+    margin: '0 auto',
+    borderRadius: '4px',
+    overflow: 'hidden',
+    border: '1px solid #e4e4e7',
+    width: '100%'
+  },
+  imageAd: {
+    width: '100%',
+    height: 'auto',
+    display: 'block',
+    objectFit: 'contain'
   }
 };
