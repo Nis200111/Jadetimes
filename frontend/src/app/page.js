@@ -37,28 +37,28 @@ const bottomVideosData = [
     title: "PEREZ HILTON FACES LONG RECOVERY AFTER LIVESTREAM INCIDENT |..",
     excerpt: "PEREZ HILTON FACES LONG RECOVERY AFTER LIVESTREAM INCIDENT -- US blogger Perez..",
     duration: "00:37",
-    image: "https://picsum.photos/seed/perezhilton/800/600"
+    image: "https://picsum.photos/seed/perezhilton/450/800" // Portrait dimensions
   },
   {
     id: 802,
     title: "AUSTRALIA FACES EXTINCTION CRISIS AS NUMBAT OFFERS HOPE | Jadetimes",
     excerpt: "AUSTRALIA FACES EXTINCTION CRISIS AS NUMBAT OFFERS HOPE -- Australia is facing a..",
     duration: "00:37",
-    image: "https://picsum.photos/seed/numbat/800/600"
+    image: "https://picsum.photos/seed/numbat/450/800" // Portrait dimensions
   },
   {
     id: 803,
     title: "Madonna Honors \"Genius\" Producer William Orbit in Emotional Tribute |...",
     excerpt: "Madonna Honors \"Genius\" Producer William Orbit in Emotional Tribute -- Madonna has..",
     duration: "00:50",
-    image: "https://picsum.photos/seed/madonna/800/600"
+    image: "https://picsum.photos/seed/madonna/450/800" // Portrait dimensions
   },
   {
     id: 804,
     title: "Fernandez Claims Dominant Victory at British MotoGP in Silverstone |...",
     excerpt: "Fernandez Claims Dominant Victory at British MotoGP in Silverstone -- Raul Fernandez..",
     duration: "00:48",
-    image: "https://picsum.photos/seed/motogp/800/600"
+    image: "https://picsum.photos/seed/motogp/450/800" // Portrait dimensions
   },
   {
     id: 805,
@@ -79,28 +79,28 @@ const bottomVideosData = [
     title: "Surging Energy Prices and Shipping Threats Middle East War Could Hurt...",
     excerpt: "Surging Energy Prices and Shipping Threats: How the Middle East War Could Hurt the Glob..",
     duration: "00:31",
-    image: "https://picsum.photos/seed/harborport/800/600"
+    image: "https://picsum.photos/seed/harborport/450/800" // Portrait dimensions
   },
   {
     id: 808,
     title: "How the War in the Middle East Is Affecting Energy, Trade, and Financ...",
     excerpt: "How the War in the Middle East Is Affecting Energy, Trade, and Finance -- The war in the..",
     duration: "00:27",
-    image: "https://picsum.photos/seed/refinerynight/800/600"
+    image: "https://picsum.photos/seed/refinerynight/450/800" // Portrait dimensions
   },
   {
     id: 809,
     title: "GREEN BOOTS' BODY MAY RECOVERED FROM MOU...",
     excerpt: "GREEN BOOTS' BODY MAY FIN.. RECOVERED FROM MOUNT EV...",
     duration: "00:35",
-    image: "https://picsum.photos/seed/mounteverest/800/600"
+    image: "https://picsum.photos/seed/mounteverest/450/800" // Portrait dimensions
   },
   {
     id: 810,
     title: "How Autonomous Drones are Reshaping Agriculture Logistics",
     excerpt: "How Autonomous Drones are Reshaping Agriculture Logistics -- Drones are transforming the way..",
     duration: "00:42",
-    image: "https://picsum.photos/seed/drones/800/600"
+    image: "https://picsum.photos/seed/drones/450/800" // Portrait dimensions
   }
 ];
 
@@ -457,12 +457,23 @@ export default function HomePage() {
               >
                 {bottomVideosData.map((video) => (
                   <div key={video.id} style={styles.bottomVideoCard}>
-                    <div 
-                      style={{
-                        ...styles.bottomVideoThumb,
-                        backgroundImage: `url(${video.image})`
-                      }}
-                    >
+                    <div style={styles.bottomVideoThumb}>
+                      {/* Blurred and darkened background layer for side parts */}
+                      <div 
+                        style={{
+                          ...styles.bottomVideoBgLayer,
+                          backgroundImage: `url(${video.image})`
+                        }}
+                      />
+                      {/* Center foreground sharp content */}
+                      <div 
+                        style={{
+                          ...styles.bottomVideoFgLayer,
+                          backgroundImage: `url(${video.image})`
+                        }}
+                      />
+                      
+                      {/* Play button and Duration overlays */}
                       <div style={styles.bottomVideoPlay}>
                         <Play size={12} fill="#ffffff" color="#ffffff" style={{ marginLeft: '1.5px' }} />
                       </div>
@@ -781,13 +792,35 @@ const styles = {
   bottomVideoThumb: {
     width: '100%',
     height: '150px', // Increased height to 150px to match taller thumbnail size in Screenshot 1
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    borderRadius: '2px',
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRadius: '2px',
+    overflow: 'hidden', // Contain the blurred background
+    background: '#000000'
+  },
+  bottomVideoBgLayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    filter: 'blur(10px) brightness(0.4)', // Darkens and blurs the side parts
+    zIndex: 1
+  },
+  bottomVideoFgLayer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundSize: 'contain', // Keeps portrait view aspect ratio in center
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    zIndex: 2
   },
   bottomVideoPlay: {
     border: '1.5px solid #ffffff',
@@ -797,7 +830,8 @@ const styles = {
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex: 3 // Draw above background/foreground layers
   },
   bottomVideoDuration: {
     position: 'absolute',
@@ -809,7 +843,8 @@ const styles = {
     fontWeight: '600',
     padding: '2px 6px',
     borderRadius: '2px',
-    fontFamily: 'monospace'
+    fontFamily: 'monospace',
+    zIndex: 3 // Draw above background/foreground layers
   },
   bottomVideoTitle: {
     fontSize: '13px',
