@@ -773,14 +773,14 @@ const styles = {
   bottomVideoCard: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '10px',
+    gap: '12px', // Adjusted gap for spacing between video and text
     flexShrink: 0,
     width: 'calc((100% - 48px) / 5)', // Recalculated for 12px gaps (4 gaps * 12px = 48px)
     minWidth: '220px' // Responsive fallback
   },
   bottomVideoThumb: {
     width: '100%',
-    height: '130px',
+    height: '150px', // Increased height to 150px to match taller thumbnail size in Screenshot 1
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     borderRadius: '2px',
@@ -827,7 +827,7 @@ const styles = {
     fontSize: '12px',
     color: '#71717a',
     lineHeight: '1.4',
-    margin: 0,
+    margin: '6px 0 0 0', // Added vertical spacing between title and excerpt
     display: '-webkit-box',
     WebkitLineClamp: '2',
     WebkitBoxOrient: 'vertical',
@@ -836,7 +836,7 @@ const styles = {
   },
   sliderArrow: {
     position: 'absolute',
-    top: '65px', // Perfectly centered on the 130px height thumbnails
+    top: '75px', // Center of the 150px height thumbnails
     zIndex: 10,
     background: '#ffffff',
     border: '1px solid #e4e4e7',
