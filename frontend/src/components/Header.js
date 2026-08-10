@@ -6,6 +6,8 @@ import { Search, X } from 'lucide-react';
 
 export default function Header({ active = "Home" }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showNewsSubmenu, setShowNewsSubmenu] = useState(false);
+  const [showSportsSubmenu, setShowSportsSubmenu] = useState(false);
   const [todayDate, setTodayDate] = useState('');
 
   useEffect(() => {
@@ -29,6 +31,36 @@ export default function Header({ active = "Home" }) {
     { name: "Fashion", path: "/category/fashion" },
     { name: "Health", path: "/category/health" },
     { name: "Law", path: "/category/law" }
+  ];
+
+  const primaryLinks = [
+    { name: "News", path: "/category/news" },
+    { name: "Opinion", path: "/category/opinion" },
+    { name: "Sports", path: "/category/sports" },
+    { name: "Travel", path: "/category/travel" },
+    { name: "Culture", path: "/category/culture" },
+    { name: "Entertainment", path: "/category/entertainment" },
+    { name: "Fashion", path: "/category/fashion" },
+    { name: "Innovation", path: "/category/innovation" },
+    { name: "Business", path: "/category/business" },
+    { name: "Political", path: "/category/political" },
+    { name: "Universe", path: "/category/universe" },
+    { name: "Health", path: "/category/health" },
+    { name: "Law", path: "/category/law" }
+  ];
+
+  const secondaryLinks = [
+    { name: "Jadetimes Magazines", path: "/magazines" },
+    { name: "Jadetimes Podcast", path: "/podcast" },
+    { name: "Jadetimes Journals", path: "/journals" },
+    { name: "Team", path: "/team" },
+    { name: "Jadetimes Store", path: "/store" },
+    { name: "Advertise With Us", path: "/advertise" },
+    { name: "Job Vacancies", path: "/jobs" },
+    { name: "Courses", path: "/courses" },
+    { name: "World Journalist Rankings", path: "/rankings" },
+    { name: "Jadetimes Contributor Program", path: "/contributor" },
+    { name: "International Research Conference 2025", path: "/conference" }
   ];
 
   return (
@@ -66,7 +98,7 @@ export default function Header({ active = "Home" }) {
 
         {/* Right: Join Now, Log In, Search */}
         <div style={styles.topRight}>
-          <a href="#" style={styles.conferenceLink} className="header-conference-link">
+          <a href="/conference" style={styles.conferenceLink} className="header-conference-link">
             <span style={{ textDecoration: 'underline', fontWeight: '700', marginRight: '4px' }}>Join Now</span> International Research Conference 2025
           </a>
           
@@ -98,28 +130,173 @@ export default function Header({ active = "Home" }) {
         </nav>
       </div>
 
+      {/* Drawer Backdrop Overlay */}
+      {mobileMenuOpen && (
+        <div style={styles.mobileBackdrop} onClick={() => {
+          setMobileMenuOpen(false);
+          setShowNewsSubmenu(false);
+        }} />
+      )}
+
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div style={styles.mobileDrawer}>
-          <nav style={styles.mobileNav}>
-            {categories.map((cat, i) => (
+        <div style={{ display: 'flex', position: 'fixed', top: 0, left: 0, bottom: 0, zIndex: 10000 }}>
+          <div style={styles.mobileDrawer}>
+            {/* Top row */}
+            <div style={styles.drawerTopRow}>
               <Link 
-                key={i} 
-                href={cat.path} 
-                style={{
-                  ...styles.mobileLink,
-                  color: cat.name === active ? '#ef4444' : '#111115'
+                href="/subscribe" 
+                style={styles.drawerSubscribe} 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setShowNewsSubmenu(false);
                 }}
-                onClick={() => setMobileMenuOpen(false)}
               >
-                {cat.name}
+                Subscribe to newsletters
               </Link>
-            ))}
-            <div style={styles.mobileDivider} />
-            <Link href="/subscribe" style={styles.mobileLinkSpecial} onClick={() => setMobileMenuOpen(false)}>
-              Subscribe : 49.99/Year
-            </Link>
-          </nav>
+              <button 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setShowNewsSubmenu(false);
+                }} 
+                style={styles.drawerCloseBtn}
+                aria-label="Close menu"
+              >
+                <X size={20} color="#ffffff" />
+              </button>
+            </div>
+
+             {/* Primary category list */}
+            <nav style={styles.drawerPrimaryNav}>
+              {primaryLinks.map((cat, i) => (
+                <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
+                  {cat.name === 'News' ? (
+                    <button
+                      onMouseEnter={() => {
+                        setShowNewsSubmenu(true);
+                        setShowSportsSubmenu(false);
+                      }}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setShowNewsSubmenu(false);
+                      }}
+                      style={{
+                        ...styles.drawerPrimaryLink,
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: '6px 0',
+                        width: '100%',
+                        textAlign: 'left',
+                        display: 'block',
+                        color: (active === 'News' || showNewsSubmenu) ? '#ef4444' : '#ffffff'
+                      }}
+                      className="drawer-primary-link"
+                    >
+                      {cat.name}
+                    </button>
+                  ) : cat.name === 'Sports' ? (
+                    <button
+                      onMouseEnter={() => {
+                        setShowSportsSubmenu(true);
+                        setShowNewsSubmenu(false);
+                      }}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setShowSportsSubmenu(false);
+                      }}
+                      style={{
+                        ...styles.drawerPrimaryLink,
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: '6px 0',
+                        width: '100%',
+                        textAlign: 'left',
+                        display: 'block',
+                        color: (active === 'Sports' || showSportsSubmenu) ? '#ef4444' : '#ffffff'
+                      }}
+                      className="drawer-primary-link"
+                    >
+                      {cat.name}
+                    </button>
+                  ) : (
+                    <Link 
+                      href={cat.path} 
+                      style={{
+                        ...styles.drawerPrimaryLink,
+                        color: cat.name === active ? '#ef4444' : '#ffffff'
+                      }}
+                      onMouseEnter={() => {
+                        setShowNewsSubmenu(false);
+                        setShowSportsSubmenu(false);
+                      }}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setShowNewsSubmenu(false);
+                        setShowSportsSubmenu(false);
+                      }}
+                      className="drawer-primary-link"
+                    >
+                      {cat.name}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            <div style={styles.drawerDivider} />
+
+            {/* Secondary links list */}
+            <nav style={styles.drawerSecondaryNav}>
+              {secondaryLinks.map((cat, i) => (
+                <Link 
+                  key={i} 
+                  href={cat.path} 
+                  style={styles.drawerSecondaryLink}
+                  onMouseEnter={() => {
+                    setShowNewsSubmenu(false);
+                    setShowSportsSubmenu(false);
+                  }}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    setShowNewsSubmenu(false);
+                    setShowSportsSubmenu(false);
+                  }}
+                  className="drawer-secondary-link"
+                >
+                  {cat.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          {/* Secondary Flyout for News Submenu */}
+          {showNewsSubmenu && (
+            <div style={styles.drawerSubmenu}>
+              <h4 style={styles.submenuHeader}>{todayDate}</h4>
+              <nav style={styles.submenuNav}>
+                <Link href="/category/news?topic=usa" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowNewsSubmenu(false); }}>USA</Link>
+                <Link href="/category/news?topic=israel-gaza" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowNewsSubmenu(false); }}>Israel-Gaza War</Link>
+                <Link href="/category/news?topic=australia" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowNewsSubmenu(false); }}>Australia</Link>
+                <Link href="/category/news?topic=asia" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowNewsSubmenu(false); }}>Asia</Link>
+                <Link href="/category/news?topic=africa" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowNewsSubmenu(false); }}>Africa</Link>
+                <Link href="/category/news?topic=europe" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowNewsSubmenu(false); }}>Europe</Link>
+                <Link href="/category/news?topic=ukraine-russia" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowNewsSubmenu(false); }}>Ukraine-Russia War</Link>
+              </nav>
+            </div>
+          )}
+
+          {/* Secondary Flyout for Sports Submenu */}
+          {showSportsSubmenu && (
+            <div style={styles.drawerSubmenu}>
+              <h4 style={styles.submenuHeader}>{todayDate}</h4>
+              <nav style={styles.submenuNav}>
+                <Link href="/category/sports?topic=wwe" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowSportsSubmenu(false); }}>WWE</Link>
+                <Link href="/category/sports?topic=cricket" className="drawer-submenu-link" onClick={() => { setMobileMenuOpen(false); setShowSportsSubmenu(false); }}>Cricket</Link>
+              </nav>
+            </div>
+          )}
         </div>
       )}
     </header>
@@ -134,7 +311,7 @@ const styles = {
     left: 0,
     zIndex: 1000,
     boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-    background: '#ffffff' // Added solid background to prevent transparency when scrolling
+    background: '#ffffff'
   },
   topBar: {
     background: '#141416', // Slate black
@@ -254,6 +431,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center'
   },
+
   bottomBar: {
     background: '#ffffff',
     height: '46px',
@@ -281,37 +459,111 @@ const styles = {
       color: '#ef4444'
     }
   },
-  mobileDrawer: {
-    position: 'absolute',
-    top: '64px',
+  mobileBackdrop: {
+    position: 'fixed',
+    top: 0,
     left: 0,
     right: 0,
-    background: '#ffffff',
-    borderBottom: '2px solid #e4e4e7',
-    padding: '20px',
-    boxShadow: '0 15px 30px rgba(0,0,0,0.1)',
-    maxHeight: '80vh',
-    overflowY: 'auto'
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.4)',
+    zIndex: 9999
   },
-  mobileNav: {
+  mobileDrawer: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: '280px',
+    background: '#111113', // Deep slate black matching the screenshot
+    color: '#ffffff',
+    zIndex: 10000,
+    boxShadow: '5px 0 25px rgba(0,0,0,0.4)',
+    display: 'flex',
+    flexDirection: 'column',
+    overflowY: 'auto',
+    padding: '24px',
+    fontFamily: 'var(--font-main), sans-serif'
+  },
+  drawerTopRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '26px'
+  },
+  drawerSubscribe: {
+    color: '#a1a1aa',
+    fontSize: '12px',
+    fontWeight: '600',
+    textDecoration: 'none',
+    letterSpacing: '0.5px'
+  },
+  drawerCloseBtn: {
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    padding: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  drawerPrimaryNav: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '14px'
+  },
+  drawerPrimaryLink: {
+    fontSize: '15px',
+    fontWeight: '500',
+    textDecoration: 'none',
+    letterSpacing: '0.4px',
+    transition: 'color 0.2s'
+  },
+  drawerDivider: {
+    height: '1px',
+    background: '#27272a',
+    margin: '20px 0'
+  },
+  drawerSecondaryNav: {
     display: 'flex',
     flexDirection: 'column',
     gap: '12px'
   },
-  mobileLink: {
-    fontSize: '15px',
-    fontWeight: '700',
-    padding: '6px 0'
+  drawerSecondaryLink: {
+    fontSize: '13px',
+    fontWeight: '400',
+    color: '#a1a1aa',
+    textDecoration: 'none',
+    letterSpacing: '0.4px',
+    transition: 'color 0.2s'
   },
-  mobileDivider: {
-    height: '1px',
-    background: '#e4e4e7',
-    margin: '10px 0'
+  drawerSubmenu: {
+    position: 'fixed',
+    top: 0,
+    left: '280px',
+    bottom: 0,
+    width: '280px',
+    background: '#111113', // matching the black background of the primary menu
+    color: '#ffffff',
+    zIndex: 10001,
+    borderLeft: '1px solid #27272a',
+    display: 'flex',
+    flexDirection: 'column',
+    overflowY: 'auto',
+    padding: '24px 0px',
+    fontFamily: 'var(--font-main), sans-serif',
+    boxShadow: '5px 0 25px rgba(0,0,0,0.3)'
   },
-  mobileLinkSpecial: {
-    color: '#ff3b30',
-    fontSize: '15px',
-    fontWeight: '800'
+  submenuHeader: {
+    fontSize: '12px',
+    color: '#a1a1aa',
+    fontWeight: '600',
+    padding: '0px 24px 26px 24px',
+    margin: 0,
+    letterSpacing: '0.5px'
+  },
+  submenuNav: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 };
 
@@ -333,6 +585,32 @@ if (typeof window !== 'undefined') {
       a[style*="conferenceLink"] {
         display: none !important;
       }
+    }
+    .drawer-primary-link {
+      color: #ffffff;
+      transition: color 0.2s;
+    }
+    .drawer-primary-link:hover {
+      color: #ef4444 !important;
+    }
+    .drawer-secondary-link {
+      color: #a1a1aa;
+      transition: color 0.2s;
+    }
+    .drawer-secondary-link:hover {
+      color: #ef4444 !important;
+    }
+    .drawer-submenu-link {
+      color: #ffffff;
+      transition: color 0.2s;
+      display: block;
+      padding: 12px 24px;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #27272a;
+    }
+    .drawer-submenu-link:hover {
+      color: #ef4444 !important;
     }
   `;
   document.head.appendChild(styleSheet);

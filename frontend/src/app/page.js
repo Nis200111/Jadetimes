@@ -516,8 +516,7 @@ const styles = {
     background: '#ffffff',
     minHeight: '100vh',
     display: 'flex',
-    flexDirection: 'column',
-    paddingTop: '110px' // Added top offset padding for the fixed header
+    flexDirection: 'column'
   },
   loaderContainer: {
     flexGrow: 1,
